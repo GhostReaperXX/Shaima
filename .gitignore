@@ -1,3 +1,14 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# PHP
+vendor/
+composer.lock
+php_errors.log
+*.log
+
 # Python
 __pycache__/
 *.py[cod]
@@ -7,23 +18,10 @@ __pycache__/
 venv/
 env/
 ENV/
+.venv
 *.egg-info/
 dist/
 build/
-
-# PHP
-vendor/
-composer.lock
-composer.phar
-
-# Logs
-*.log
-php_errors.log
-
-# Environment variables
-.env
-.env.local
-.env.*.local
 
 # IDE
 .vscode/
@@ -38,19 +36,32 @@ Thumbs.db
 desktop.ini
 
 # Temporary files
-tmp/mpdf/ttfontdata/
-tmp/*.tmp
-tmp/*.cache
+tmp/
+uploads/
+*.tmp
+*.temp
 
-# Uploads (keep structure but ignore content)
-uploads/*/
-!uploads/.gitkeep
+# Database backups
+*.sql
+*.sqlite
+*.db
 
 # Credentials
 credentials.txt
 *.key
 *.pem
 
-# Database backups (optional - uncomment if you don't want to track backups)
-# *.sql
-# *.sql.gz
+# Cache
+cache/
+*.cache
+
+# Logs
+logs/
+*.log
+
+# Node modules (if any)
+node_modules/
+
+# Build files
+build/
+dist/
