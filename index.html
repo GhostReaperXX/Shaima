@@ -1,0 +1,4057 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Online Learning Platform - Professional Courses in IT, Business & Law</title>
+    <meta name="description" content="Transform your career with our premium online courses. Expert instructors, cutting-edge curriculum, and industry-recognized certifications.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%236366f1;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23ec4899;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='45' fill='url(%23grad)'/%3E%3Cpath d='M30 50 L45 65 L70 35' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%236366f1;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23ec4899;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='45' fill='url(%23grad)'/%3E%3Cpath d='M30 50 L45 65 L70 35' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary: #ec4899;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-dark: #111827;
+            --white: #ffffff;
+            --border: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: var(--white);
+            scroll-behavior: smooth;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            margin-left: 1rem;
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: transparent;
+            color: var(--text-dark);
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.875rem;
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex: 1;
+            justify-content: flex-end;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-shrink: 0;
+            margin-right: 2rem;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 0.875rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            font-size: 0.95rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 8rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900"><path d="M0,300 Q360,200 720,300 T1440,300 L1440,900 L0,900 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+            animation: float 20s infinite linear;
+        }
+
+        .hero-3d-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .ai-3d-element,
+        .cyber-3d-element {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            backdrop-filter: blur(20px);
+            animation: float3d 15s infinite ease-in-out;
+            transform-style: preserve-3d;
+        }
+
+        .ai-3d-element {
+            top: 10%;
+            right: 10%;
+            background: radial-gradient(circle, rgba(99,102,241,0.3) 0%, rgba(236,72,153,0.2) 50%, transparent 70%);
+            box-shadow: 0 0 100px rgba(99,102,241,0.4), inset 0 0 50px rgba(236,72,153,0.2);
+            animation-delay: 0s;
+        }
+
+        .ai-3d-element::before {
+            content: '🤖';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.5));
+            animation: rotate3d 10s infinite linear;
+        }
+
+        .cyber-3d-element {
+            bottom: 15%;
+            left: 8%;
+            background: radial-gradient(circle, rgba(236,72,153,0.3) 0%, rgba(99,102,241,0.2) 50%, transparent 70%);
+            box-shadow: 0 0 100px rgba(236,72,153,0.4), inset 0 0 50px rgba(99,102,241,0.2);
+            animation-delay: -5s;
+        }
+
+        .cyber-3d-element::before {
+            content: '🔒';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.5));
+            animation: rotate3d 12s infinite linear reverse;
+        }
+
+        @keyframes float3d {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotateY(0deg) rotateX(0deg);
+            }
+            25% {
+                transform: translateY(-30px) translateX(20px) rotateY(90deg) rotateX(10deg);
+            }
+            50% {
+                transform: translateY(-20px) translateX(-20px) rotateY(180deg) rotateX(0deg);
+            }
+            75% {
+                transform: translateY(-40px) translateX(10px) rotateY(270deg) rotateX(-10deg);
+            }
+        }
+
+        @keyframes rotate3d {
+            0% { transform: translate(-50%, -50%) rotateY(0deg) rotateZ(0deg); }
+            100% { transform: translate(-50%, -50%) rotateY(360deg) rotateZ(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-50px, -50px) rotate(360deg); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            line-height: 1.7;
+        }
+
+        .search-box {
+            max-width: 700px;
+            margin: 2.5rem auto;
+            display: flex;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            padding: 0.75rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 1.25rem 1.75rem;
+            font-size: 1rem;
+            outline: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-dark);
+        }
+
+        .search-box button {
+            background: var(--white);
+            color: var(--primary);
+            border: none;
+            padding: 1.25rem 2.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .search-box button:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .section {
+            padding: 6rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-title p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-light);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .team-section {
+            background: var(--bg-light);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border);
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--white);
+            font-weight: 700;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .team-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .team-avatar-text {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            font-weight: 700;
+            font-size: 3rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+        
+        .team-avatar:not(:has(img)) .team-avatar-text,
+        .team-avatar img[src=""] ~ .team-avatar-text {
+            opacity: 1;
+        }
+
+        .team-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-card .team-role {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .team-card .team-id {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .impact-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .impact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .impact-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 28px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .impact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.5s;
+        }
+
+        .impact-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .impact-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            border-color: var(--primary-light);
+        }
+
+        .impact-card.featured {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .impact-card.featured h3,
+        .impact-card.featured p {
+            color: var(--white);
+        }
+
+        .impact-icon-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .impact-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+            transition: all 0.4s;
+        }
+
+        .impact-card:hover .impact-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        .impact-card.featured .impact-icon {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .impact-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(135deg, var(--secondary), #ec4899);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .impact-card h3 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            letter-spacing: -0.02em;
+        }
+
+        .impact-card p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .impact-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .impact-stat-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .impact-stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .impact-stat-label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .impact-companies {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .company-logo {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .company-logo:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+
+        .success-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+            padding-top: 4rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .metric-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+        }
+
+        .metric-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .metric-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+
+        .metric-content h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-content p {
+            font-size: 1rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .reviews-section {
+            background: var(--bg-light);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .review-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .review-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transform: scaleY(0);
+            transition: transform 0.4s;
+        }
+
+        .review-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .review-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-light);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .review-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .review-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .review-card:hover .review-avatar img {
+            transform: scale(1.08);
+        }
+
+        .review-avatar-text {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .review-avatar:not(:has(img)) .review-avatar-text,
+        .review-avatar img[src=""] ~ .review-avatar-text {
+            opacity: 1;
+        }
+
+        .review-info {
+            flex: 1;
+        }
+
+        .review-info h4 {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+        }
+
+        .review-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .review-rating {
+            color: var(--warning);
+            font-size: 1rem;
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .review-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .review-course {
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-light);
+            border-radius: 12px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: bottom;
+            opacity: 0.3;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 3.5rem 2.5rem;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            border-radius: 28px;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.6s;
+        }
+
+        .stat-card:hover::before {
+            transform: scale(1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-20px) scale(1.05) rotateX(5deg);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4), 0 0 40px rgba(255,255,255,0.2);
+        }
+
+        .stat-icon-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-icon {
+            font-size: 4rem;
+            opacity: 0.95;
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+            padding: 1.5rem;
+            border-radius: 20px;
+            transition: all 0.4s;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            animation: pulse-ring 2s infinite;
+            z-index: 1;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .stat-card:hover .stat-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.2));
+        }
+
+        .stat-number {
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 0.75rem;
+            line-height: 1;
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            letter-spacing: -0.02em;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .stat-progress {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6));
+            border-radius: 10px;
+            width: 0;
+            transition: width 2s ease-out;
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .stat-detail {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            transform: scaleX(0);
+            transition: transform 0.5s;
+        }
+
+        .stat-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .stats-additional {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-mini-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+        }
+
+        .stat-mini-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .stat-mini-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+
+        .stat-mini-content {
+            flex: 1;
+        }
+
+        .stat-mini-number {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-mini-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .about-section {
+            background: var(--white);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-main {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .about-text h3:first-child {
+            margin-top: 0;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .about-features {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .about-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+        }
+
+        .about-features li i {
+            color: var(--success);
+            font-size: 1.25rem;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        .about-stats-mini {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .about-stat-box {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            transition: all 0.4s;
+            box-shadow: var(--shadow-md);
+        }
+
+        .about-stat-box:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .about-stat-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .about-stat-info h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-stat-info p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--white) 100%);
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-info-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: all 0.4s;
+            border: 2px solid var(--border);
+        }
+
+        .contact-info-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-light);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--white);
+            margin: 0 auto 1.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .contact-info-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-info-card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .contact-info-card a,
+        .contact-info-card address {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            font-style: normal;
+            transition: color 0.3s;
+        }
+
+        .contact-info-card a:hover {
+            color: var(--primary-dark);
+        }
+
+        .contact-form-wrapper {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: var(--bg-light);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .btn-submit-contact {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 1.25rem 2.5rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-submit-contact:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        @media (max-width: 968px) {
+            .about-main,
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .about-section {
+            background: var(--white);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-main {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .about-text h3:first-child {
+            margin-top: 0;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .about-features {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .about-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+        }
+
+        .about-features li i {
+            color: var(--success);
+            font-size: 1.25rem;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        .about-stats-mini {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .about-stat-box {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            transition: all 0.4s;
+            box-shadow: var(--shadow-md);
+        }
+
+        .about-stat-box:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .about-stat-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .about-stat-info h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-stat-info p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--white) 100%);
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-info-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: all 0.4s;
+            border: 2px solid var(--border);
+        }
+
+        .contact-info-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-light);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--white);
+            margin: 0 auto 1.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .contact-info-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-info-card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .contact-info-card a,
+        .contact-info-card address {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            font-style: normal;
+            transition: color 0.3s;
+        }
+
+        .contact-info-card a:hover {
+            color: var(--primary-dark);
+        }
+
+        .contact-form-wrapper {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: var(--bg-light);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .btn-submit-contact {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 1.25rem 2.5rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-submit-contact:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .tech-visualization-section {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-visualization-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(99,102,241,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(236,72,153,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .tech-visualization-section .section-title h2,
+        .tech-visualization-section .section-title p {
+            color: var(--white);
+        }
+
+        .tech-viz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tech-viz-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-viz-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.5s;
+        }
+
+        .tech-viz-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .tech-viz-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(99,102,241,0.2);
+        }
+
+        .ai-viz {
+            border-color: rgba(99,102,241,0.3);
+        }
+
+        .ai-viz:hover {
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(99,102,241,0.4);
+        }
+
+        .cyber-viz {
+            border-color: rgba(236,72,153,0.3);
+        }
+
+        .cyber-viz:hover {
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(236,72,153,0.4);
+        }
+
+        .viz-header {
+            margin-bottom: 2rem;
+        }
+
+        .viz-header h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .viz-header p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1rem;
+        }
+
+        .matrix-container {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .matrix-container canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .viz-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .learning-path {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .path-node {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(99,102,241,0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(99,102,241,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: all 0.5s;
+            animation: pulseNode 2s infinite;
+        }
+
+        .path-node.active {
+            background: rgba(99,102,241,0.4);
+            box-shadow: 0 0 20px rgba(99,102,241,0.6);
+            animation: pulseNodeActive 1.5s infinite;
+        }
+
+        .path-line {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(99,102,241,0.5), rgba(236,72,153,0.5));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .path-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            animation: flowLine 2s infinite;
+        }
+
+        @keyframes pulseNode {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        @keyframes pulseNodeActive {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(99,102,241,0.6); }
+            50% { transform: scale(1.15); box-shadow: 0 0 30px rgba(99,102,241,0.9); }
+        }
+
+        @keyframes flowLine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .security-shield {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shield-layer {
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid;
+            animation: rotateShield 10s linear infinite;
+        }
+
+        .shield-layer:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            border-color: rgba(236,72,153,0.4);
+            animation-duration: 8s;
+        }
+
+        .shield-layer:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            border-color: rgba(99,102,241,0.4);
+            animation-duration: 10s;
+            animation-direction: reverse;
+        }
+
+        .shield-layer:nth-child(3) {
+            width: 140px;
+            height: 140px;
+            border-color: rgba(236,72,153,0.3);
+            animation-duration: 12s;
+        }
+
+        .security-shield i {
+            font-size: 4rem;
+            color: var(--secondary);
+            z-index: 3;
+            animation: pulseShield 2s infinite;
+            filter: drop-shadow(0 0 10px rgba(236,72,153,0.6));
+        }
+
+        @keyframes rotateShield {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulseShield {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .viz-info {
+            display: flex;
+            justify-content: space-around;
+            gap: 1rem;
+        }
+
+        .viz-stat {
+            text-align: center;
+            flex: 1;
+        }
+
+        .viz-stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .viz-stat-label {
+            display: block;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 968px) {
+            .about-main,
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-viz-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .matrix-container {
+                height: 300px;
+            }
+        }
+
+        .courses-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            padding: 0.875rem 2rem;
+            border: 2px solid var(--border);
+            background: var(--white);
+            color: var(--text-dark);
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background: var(--white);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border);
+        }
+
+        .course-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-light);
+        }
+
+        .course-image {
+            width: 100%;
+            height: 280px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 24px 24px 0 0;
+        }
+
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: auto;
+            -ms-interpolation-mode: bicubic;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1), filter 0.8s, opacity 0.6s;
+            animation: imageLoad 1s ease-out;
+            filter: brightness(1.1) contrast(1.15) saturate(1.2) blur(0.3px);
+            will-change: transform, filter;
+            -webkit-backface-visibility: hidden;
+            -webkit-perspective: 1000;
+            perspective: 1000;
+            position: relative;
+        }
+
+        .course-image img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(236,72,153,0.15) 100%);
+            mix-blend-mode: overlay;
+            z-index: 1;
+        }
+
+        @keyframes imageLoad {
+            0% {
+                opacity: 0;
+                transform: scale(1.15) translateY(10px);
+                filter: blur(15px) brightness(0.8) contrast(0.9);
+            }
+            50% {
+                opacity: 0.7;
+                filter: blur(5px) brightness(0.95) contrast(1.0);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                filter: blur(0) brightness(1.15) contrast(1.25) saturate(1.3) blur(0.2px);
+            }
+        }
+
+        .course-card:hover .course-image img {
+            transform: scale(1.3) translateY(-5px);
+            filter: brightness(1.3) contrast(1.3) saturate(1.4) blur(0px) drop-shadow(0 15px 30px rgba(0,0,0,0.4));
+            -webkit-filter: brightness(1.3) contrast(1.3) saturate(1.4) blur(0px) drop-shadow(0 15px 30px rgba(0,0,0,0.4));
+        }
+
+        .course-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99,102,241,0.25) 0%, rgba(236,72,153,0.25) 100%);
+            mix-blend-mode: overlay;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.6s;
+            pointer-events: none;
+        }
+
+        .course-card:hover .course-image::after {
+            opacity: 1;
+        }
+
+        .course-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.15) 100%);
+            opacity: 0;
+            transition: opacity 0.8s;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .course-card:hover .course-image::before {
+            opacity: 1;
+        }
+
+        .course-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(236,72,153,0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.6s;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .course-card:hover .course-image::after {
+            opacity: 1;
+        }
+
+        .course-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.6s;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .course-card:hover .course-image::before {
+            opacity: 1;
+        }
+
+        .course-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 100%);
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, var(--secondary), #ec4899);
+            color: var(--white);
+            padding: 0.5rem 1.25rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            z-index: 2;
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(10px);
+        }
+
+        .course-content {
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-category {
+            color: var(--primary);
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .course-title {
+            font-size: 1.375rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+
+        .course-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+            flex: 1;
+        }
+
+        .course-instructor {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .course-instructor i {
+            color: var(--primary);
+        }
+
+        .course-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border);
+            margin-bottom: 1rem;
+        }
+
+        .course-price {
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .course-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--warning);
+            font-weight: 600;
+        }
+
+        .btn-enroll {
+            display: block;
+            width: 100%;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-enroll:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .chatbot-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .chatbot-button {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .chatbot-button:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.6);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 90px;
+            right: 0;
+            width: 420px;
+            height: 650px;
+            background: var(--white);
+            border-radius: 28px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.35);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideUp 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 2px solid var(--border);
+            backdrop-filter: blur(20px);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .chatbot-window.active {
+            display: flex;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 1.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .chatbot-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .chatbot-header h3::before {
+            content: '🤖';
+            font-size: 1.5rem;
+        }
+
+        .chatbot-header h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .chatbot-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 1.75rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            background: linear-gradient(to bottom, var(--bg-light), var(--white));
+        }
+
+        .chatbot-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar-track {
+            background: var(--bg-light);
+        }
+
+        .chatbot-messages::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+
+        .message {
+            padding: 1rem 1.25rem;
+            border-radius: 18px;
+            max-width: 85%;
+            line-height: 1.6;
+            animation: messageSlide 0.3s ease-out;
+            word-wrap: break-word;
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.bot {
+            background: var(--white);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+        }
+
+        .message.bot.loading {
+            opacity: 0.6;
+            font-style: italic;
+        }
+
+        .message.bot.loading::after {
+            content: '...';
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .message.bot strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .message.bot em {
+            font-style: italic;
+            color: var(--text-light);
+        }
+
+        .message.bot.loading {
+            opacity: 0.6;
+            font-style: italic;
+        }
+
+        .message.bot.loading::after {
+            content: '...';
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .message.user {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .chatbot-input {
+            padding: 1.25rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 0.75rem;
+            background: var(--white);
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            border: 2px solid var(--border);
+            padding: 0.875rem 1.25rem;
+            border-radius: 12px;
+            outline: none;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        .chatbot-input input:focus {
+            border-color: var(--primary);
+        }
+
+        .chatbot-input button {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            border: none;
+            padding: 0.875rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .chatbot-input button:hover {
+            transform: scale(1.05);
+        }
+
+        .footer {
+            background: var(--bg-dark);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 1.5rem;
+                min-height: 70vh;
+            }
+
+            .section {
+                padding: 4rem 1.5rem;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chatbot-container {
+                right: 1rem;
+                bottom: 1rem;
+            }
+
+            .chatbot-window {
+                width: calc(100vw - 2rem);
+                right: -1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span data-en="EduPlatform" data-ar="منصة التعليم">EduPlatform</span>
+            </a>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#home" data-en="Home" data-ar="الرئيسية">Home</a></li>
+                    <li><a href="#about" data-en="About Us" data-ar="من نحن">About Us</a></li>
+                    <li><a href="#courses" data-en="Courses" data-ar="الدورات">Courses</a></li>
+                    <li><a href="#reviews" data-en="Reviews" data-ar="المراجعات">Reviews</a></li>
+                    <li><a href="#team" data-en="Our Team" data-ar="فريقنا">Our Team</a></li>
+                    <li><a href="#services" data-en="Services" data-ar="الخدمات">Services</a></li>
+                    <li><a href="#contact" data-en="Contact" data-ar="اتصل بنا">Contact</a></li>
+                </ul>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" onclick="switchLang('en')">EN</button>
+                    <button class="lang-btn" onclick="switchLang('ar')">AR</button>
+                </div>
+                <a href="login.php" class="btn-primary" data-en="Employee Portal" data-ar="بوابة الموظف">Employee Portal</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 data-en="Transform Your Career with Premium Online Learning" data-ar="حول مسيرتك المهنية مع التعلم الإلكتروني المميز">Transform Your Career with Premium Online Learning</h1>
+            <p data-en="Join thousands of professionals advancing their careers with our expert-led courses. Industry-recognized certifications, cutting-edge curriculum, and flexible learning paths." data-ar="انضم إلى آلاف المحترفين الذين يطورون مسيرتهم المهنية من خلال دوراتنا التي يقدمها الخبراء. شهادات معترف بها في الصناعة، منهج حديث، ومسارات تعليمية مرنة.">Join thousands of professionals advancing their careers with our expert-led courses. Industry-recognized certifications, cutting-edge curriculum, and flexible learning paths.</p>
+            <div class="search-box">
+                <input type="text" id="courseSearchInput" placeholder="Search for a course..." onkeypress="if(event.key==='Enter') searchCourses()">
+                <button onclick="searchCourses()"><i class="fas fa-search"></i> <span data-en="Search" data-ar="بحث">Search</span></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="services">
+    <div class="container">
+            <div class="section-title">
+                <h2 data-en="Why Choose Us" data-ar="لماذا تختارنا">Why Choose Us</h2>
+                <p data-en="We deliver world-class education with industry-leading instructors and cutting-edge technology" data-ar="نقدم تعليماً عالمياً مع مدربين رائدين في الصناعة وتكنولوجيا حديثة">We deliver world-class education with industry-leading instructors and cutting-edge technology</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 data-en="Expert Instructors" data-ar="مدربون خبراء">Expert Instructors</h3>
+                    <p data-en="Learn from industry professionals with years of real-world experience and proven track records" data-ar="تعلم من محترفين في الصناعة مع سنوات من الخبرة العملية وسجلات حافلة بالإنجازات">Learn from industry professionals with years of real-world experience and proven track records</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 data-en="Industry Certifications" data-ar="شهادات معتمدة">Industry Certifications</h3>
+                    <p data-en="Earn recognized certifications that boost your resume and open doors to new career opportunities" data-ar="احصل على شهادات معترف بها تعزز سيرتك الذاتية وتفتح أبواباً لفرص عمل جديدة">Earn recognized certifications that boost your resume and open doors to new career opportunities</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 data-en="Flexible Learning" data-ar="تعلم مرن">Flexible Learning</h3>
+                    <p data-en="Study at your own pace with lifetime access to course materials and 24/7 support" data-ar="ادرس بوتيرتك الخاصة مع وصول مدى الحياة لمواد الدورة ودعم على مدار الساعة">Study at your own pace with lifetime access to course materials and 24/7 support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section stats-section">
+        <div class="container">
+            <div class="section-title" style="color: white;">
+                <h2 data-en="Platform Excellence in Numbers" data-ar="التميز في الأرقام">Platform Excellence in Numbers</h2>
+                <p style="color: rgba(255,255,255,0.95); font-weight: 500;" data-en="Join a thriving community of learners achieving their career goals" data-ar="انضم إلى مجتمع مزدهر من المتعلمين يحققون أهدافهم المهنية">Join a thriving community of learners achieving their career goals</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-pulse"></div>
+                    </div>
+                    <div class="stat-number" data-count="50000">0</div>
+                    <div class="stat-label" data-en="Active Students" data-ar="طالب نشط">Active Students</div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" data-progress="100"></div>
+                    </div>
+                    <div class="stat-detail" data-en="+12% growth this month" data-ar="+12% نمو هذا الشهر">+12% growth this month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <div class="stat-icon"><i class="fas fa-book"></i></div>
+                        <div class="stat-pulse"></div>
+                    </div>
+                    <div class="stat-number" data-count="200">0</div>
+                    <div class="stat-label" data-en="Expert Courses" data-ar="دورة احترافية">Expert Courses</div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" data-progress="100"></div>
+                    </div>
+                    <div class="stat-detail" data-en="15 new courses added" data-ar="15 دورة جديدة مضافة">15 new courses added</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                        <div class="stat-pulse"></div>
+                    </div>
+                    <div class="stat-number" data-count="150">0</div>
+                    <div class="stat-label" data-en="Expert Instructors" data-ar="مدرب خبير">Expert Instructors</div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" data-progress="100"></div>
+                    </div>
+                    <div class="stat-detail" data-en="Industry-leading professionals" data-ar="محترفون رائدون في الصناعة">Industry-leading professionals</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <div class="stat-icon"><i class="fas fa-trophy"></i></div>
+                        <div class="stat-pulse"></div>
+                    </div>
+                    <div class="stat-number" data-count="95">0</div>
+                    <div class="stat-label" data-en="Success Rate %" data-ar="نسبة النجاح">Success Rate %</div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" data-progress="95"></div>
+                    </div>
+                    <div class="stat-detail" data-en="Career transformation achieved" data-ar="تحول مهني محقق">Career transformation achieved</div>
+                </div>
+            </div>
+            <div class="stats-additional">
+                <div class="stat-mini-card">
+                    <div class="stat-mini-icon"><i class="fas fa-globe"></i></div>
+                    <div class="stat-mini-content">
+                        <div class="stat-mini-number">120+</div>
+                        <div class="stat-mini-label" data-en="Countries" data-ar="دولة">Countries</div>
+                    </div>
+                </div>
+                <div class="stat-mini-card">
+                    <div class="stat-mini-icon"><i class="fas fa-clock"></i></div>
+                    <div class="stat-mini-content">
+                        <div class="stat-mini-number">2.5M+</div>
+                        <div class="stat-mini-label" data-en="Learning Hours" data-ar="ساعة تعلم">Learning Hours</div>
+                    </div>
+                </div>
+                <div class="stat-mini-card">
+                    <div class="stat-mini-icon"><i class="fas fa-certificate"></i></div>
+                    <div class="stat-mini-content">
+                        <div class="stat-mini-number">45K+</div>
+                        <div class="stat-mini-label" data-en="Certifications" data-ar="شهادة">Certifications</div>
+                    </div>
+                </div>
+                <div class="stat-mini-card">
+                    <div class="stat-mini-icon"><i class="fas fa-star"></i></div>
+                    <div class="stat-mini-content">
+                        <div class="stat-mini-number">4.9/5</div>
+                        <div class="stat-mini-label" data-en="Avg Rating" data-ar="متوسط التقييم">Avg Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section team-section" id="team">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-en="Meet Our Founders" data-ar="تعرف على مؤسسينا">Meet Our Founders</h2>
+                <p data-en="Passionate educators and industry experts dedicated to your success" data-ar="مربون متحمسون وخبراء في الصناعة ملتزمون بنجاحك">Passionate educators and industry experts dedicated to your success</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img src="assets/founder_shaima.jpeg" alt="Shaima Abdelbaset Mohammad Maghaireh" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.opacity='1';">
+                        <div class="team-avatar-text">SM</div>
+                    </div>
+                    <h3>Shaima Abdelbaset Mohammad Maghaireh</h3>
+                    <div class="team-role" data-en="Co-Founder" data-ar="مؤسس مشارك">Co-Founder</div>
+                    <div class="team-id">ID: 202120128</div>
+                    <div class="team-contact" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                        <div style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.5rem;">
+                            <i class="fas fa-envelope" style="color: var(--primary); margin-left: 0.5rem;"></i>
+                            <a href="mailto:salmaghaireh@gmail.com" style="color: var(--primary); text-decoration: none;">salmaghaireh@gmail.com</a>
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--text-light);">
+                            <i class="fas fa-phone" style="color: var(--primary); margin-left: 0.5rem;"></i>
+                            <a href="tel:0777853069" style="color: var(--primary); text-decoration: none;">0777853069</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img src="assets/founder_areefeh.jpeg" alt="Areefeh Ahmad Abdelrahman Ananzeh" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.opacity='1';">
+                        <div class="team-avatar-text">AA</div>
+                    </div>
+                    <h3>Areefeh Ahmad Abdelrahman Ananzeh</h3>
+                    <div class="team-role" data-en="Co-Founder" data-ar="مؤسس مشارك">Co-Founder</div>
+                    <div class="team-id">ID: 202230008</div>
+                    <div class="team-contact" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                        <div style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.5rem;">
+                            <i class="fas fa-envelope" style="color: var(--primary); margin-left: 0.5rem;"></i>
+                            <a href="mailto:arefahahmmad@gmail.com" style="color: var(--primary); text-decoration: none;">arefahahmmad@gmail.com</a>
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--text-light);">
+                            <i class="fas fa-phone" style="color: var(--primary); margin-left: 0.5rem;"></i>
+                            <a href="tel:0788513603" style="color: var(--primary); text-decoration: none;">0788513603</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img src="assets/founder_rania.jpeg" alt="Rania Abd AlHakim Bani Atta" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.opacity='1';">
+                        <div class="team-avatar-text">RB</div>
+                    </div>
+                    <h3>Rania Abd AlHakim Bani Atta</h3>
+                    <div class="team-role" data-en="Co-Founder" data-ar="مؤسس مشارك">Co-Founder</div>
+                    <div class="team-id">ID: 202210465</div>
+                    <div class="team-contact" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                        <div style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.5rem;">
+                            <i class="fas fa-envelope" style="color: var(--primary); margin-left: 0.5rem;"></i>
+                            <a href="mailto:raniabaniatta@gmail.com" style="color: var(--primary); text-decoration: none;">raniabaniatta@gmail.com</a>
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--text-light);">
+                            <i class="fas fa-phone" style="color: var(--primary); margin-left: 0.5rem;"></i>
+                            <a href="tel:0777571209" style="color: var(--primary); text-decoration: none;">0777571209</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img src="assets/founder_marah.jpeg" alt="Marah Saeed Husni Obeidat" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.opacity='1';">
+                        <div class="team-avatar-text">MO</div>
+                    </div>
+                    <h3>Marah Saeed Husni Obeidat</h3>
+                    <div class="team-role" data-en="Co-Founder" data-ar="مؤسس مشارك">Co-Founder</div>
+                    <div class="team-id">ID: 202210025</div>
+                    <div class="team-contact" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                        <div style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.5rem;">
+                            <i class="fas fa-envelope" style="color: var(--primary); margin-left: 0.5rem;"></i>
+                            <a href="mailto:marahsaeed93@gmail.com" style="color: var(--primary); text-decoration: none;">marahsaeed93@gmail.com</a>
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--text-light);">
+                            <i class="fas fa-phone" style="color: var(--primary); margin-left: 0.5rem;"></i>
+                            <a href="tel:0790719609" style="color: var(--primary); text-decoration: none;">07 9071 9609</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section impact-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-en="Transformative Learning Impact" data-ar="تأثير تعليمي تحويلي">Transformative Learning Impact</h2>
+                <p data-en="Real results from real students - See how our platform drives career transformation" data-ar="نتائج حقيقية من طلاب حقيقيين - شاهد كيف تقود منصتنا تحولاً مهنياً">Real results from real students - See how our platform drives career transformation</p>
+            </div>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-icon-wrapper">
+                        <div class="impact-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="impact-badge">+87%</div>
+                    </div>
+                    <h3 data-en="Career Advancement" data-ar="تقدم مهني">Career Advancement</h3>
+                    <p data-en="Students report significant career growth within 6 months of course completion" data-ar="الطلاب يبلغون عن نمو مهني كبير خلال 6 أشهر من إكمال الدورة">Students report significant career growth within 6 months of course completion</p>
+                    <div class="impact-stats">
+                        <div class="impact-stat-item">
+                            <span class="impact-stat-number">4.2x</span>
+                            <span class="impact-stat-label" data-en="Salary Increase" data-ar="زيادة الراتب">Salary Increase</span>
+                        </div>
+                        <div class="impact-stat-item">
+                            <span class="impact-stat-number">92%</span>
+                            <span class="impact-stat-label" data-en="Job Placement" data-ar="التوظيف">Job Placement</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="impact-card featured">
+                    <div class="impact-icon-wrapper">
+                        <div class="impact-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="impact-badge">#1</div>
+                    </div>
+                    <h3 data-en="Industry Recognition" data-ar="اعتراف صناعي">Industry Recognition</h3>
+                    <p data-en="Our certifications are recognized by top tech companies and leading organizations worldwide" data-ar="شهاداتنا معترف بها من قبل أكبر شركات التكنولوجيا والمنظمات الرائدة عالمياً">Our certifications are recognized by top tech companies and leading organizations worldwide</p>
+                    <div class="impact-companies">
+                        <div class="company-logo">Google</div>
+                        <div class="company-logo">Microsoft</div>
+                        <div class="company-logo">Amazon</div>
+                        <div class="company-logo">IBM</div>
+                    </div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon-wrapper">
+                        <div class="impact-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="impact-badge">98%</div>
+                    </div>
+                    <h3 data-en="Completion Rate" data-ar="معدل الإكمال">Completion Rate</h3>
+                    <p data-en="Our engaging curriculum and AI-powered support ensure students complete their learning journey" data-ar="منهجنا الجذاب والدعم المدعوم بالذكاء الاصطناعي يضمن للطلاب إكمال رحلتهم التعليمية">Our engaging curriculum and AI-powered support ensure students complete their learning journey</p>
+                    <div class="impact-stats">
+                        <div class="impact-stat-item">
+                            <span class="impact-stat-number">2.5M+</span>
+                            <span class="impact-stat-label" data-en="Hours Learned" data-ar="ساعات التعلم">Hours Learned</span>
+                        </div>
+                        <div class="impact-stat-item">
+                            <span class="impact-stat-number">4.9/5</span>
+                            <span class="impact-stat-label" data-en="Avg Rating" data-ar="متوسط التقييم">Avg Rating</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="success-metrics">
+                <div class="metric-item">
+                    <div class="metric-icon"><i class="fas fa-briefcase"></i></div>
+                    <div class="metric-content">
+                        <h4 data-en="Career Transitions" data-ar="تحولات مهنية">Career Transitions</h4>
+                        <p data-en="Over 15,000 successful career transitions in the past year" data-ar="أكثر من 15,000 تحول مهني ناجح في العام الماضي">Over 15,000 successful career transitions in the past year</p>
+                    </div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-icon"><i class="fas fa-award"></i></div>
+                    <div class="metric-content">
+                        <h4 data-en="Certifications Earned" data-ar="الشهادات المكتسبة">Certifications Earned</h4>
+                        <p data-en="More than 45,000 industry-recognized certifications awarded" data-ar="أكثر من 45,000 شهادة معترف بها في الصناعة تم منحها">More than 45,000 industry-recognized certifications awarded</p>
+                    </div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-icon"><i class="fas fa-network-wired"></i></div>
+                    <div class="metric-content">
+                        <h4 data-en="Global Network" data-ar="شبكة عالمية">Global Network</h4>
+                        <p data-en="Students from 120+ countries building a worldwide professional network" data-ar="طلاب من أكثر من 120 دولة يبنون شبكة مهنية عالمية">Students from 120+ countries building a worldwide professional network</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section reviews-section" id="reviews">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-en="Student Reviews & Testimonials" data-ar="آراء الطلاب والشهادات">Student Reviews & Testimonials</h2>
+                <p data-en="See what our students say about their learning experience" data-ar="شاهد ما يقوله طلابنا عن تجربتهم التعليمية">See what our students say about their learning experience</p>
+        </div>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <img src="assets/review_ahmed_mohammed.jpeg" alt="Ahmed Mohammed" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.opacity='1';">
+                            <div class="review-avatar-text">AM</div>
+                        </div>
+                        <div class="review-info">
+                            <h4>Ahmed Mohammed</h4>
+                            <p data-en="Software Engineer" data-ar="مهندس برمجيات">Software Engineer</p>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text" data-en="This platform completely transformed my career. The courses are comprehensive, the instructors are world-class, and the AI chatbot helped me find the perfect learning path. Highly recommended!" data-ar="هذه المنصة غيرت مسيرتي المهنية بالكامل. الدورات شاملة، المدربون على مستوى عالمي، والشات بوت الذكي ساعدني في العثور على المسار التعليمي المثالي. أنصح بها بشدة!">This platform completely transformed my career. The courses are comprehensive, the instructors are world-class, and the AI chatbot helped me find the perfect learning path. Highly recommended!</p>
+                    <div class="review-course" data-en="Enrolled in: Professional Software Engineering" data-ar="مسجل في: هندسة البرمجيات الاحترافية">Enrolled in: Professional Software Engineering</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <img src="assets/review_sara_khalid.jpeg" alt="Sara Khalid" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.opacity='1';">
+                            <div class="review-avatar-text">SK</div>
+                        </div>
+                        <div class="review-info">
+                            <h4>Sara Khalid</h4>
+                            <p data-en="Data Scientist" data-ar="عالمة بيانات">Data Scientist</p>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text" data-en="The best investment I've made in my education. The AI chatbot provided personalized recommendations and a complete roadmap. The course quality is exceptional!" data-ar="أفضل استثمار قمت به في تعليمي. الشات بوت الذكي قدم توصيات مخصصة وخارطة طريق كاملة. جودة الدورات استثنائية!">The best investment I've made in my education. The AI chatbot provided personalized recommendations and a complete roadmap. The course quality is exceptional!</p>
+                    <div class="review-course" data-en="Enrolled in: AI and Machine Learning" data-ar="مسجل في: الذكاء الاصطناعي والتعلم الآلي">Enrolled in: AI and Machine Learning</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <img src="assets/review_mohammed_ali.jpeg" alt="Mohammed Ali" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.opacity='1';">
+                            <div class="review-avatar-text">MA</div>
+                        </div>
+                        <div class="review-info">
+                            <h4>Mohammed Ali</h4>
+                            <p data-en="Business Analyst" data-ar="محلل أعمال">Business Analyst</p>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text" data-en="Professional, engaging, and results-driven. The roadmap feature helped me plan my learning journey perfectly. The instructors are experts in their fields!" data-ar="احترافي، جذاب، وموجه للنتائج. ميزة خارطة الطريق ساعدتني في التخطيط لرحلتي التعليمية بشكل مثالي. المدربون خبراء في مجالاتهم!">Professional, engaging, and results-driven. The roadmap feature helped me plan my learning journey perfectly. The instructors are experts in their fields!</p>
+                    <div class="review-course" data-en="Enrolled in: Strategic Business Management" data-ar="مسجل في: إدارة الأعمال الاستراتيجية">Enrolled in: Strategic Business Management</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <img src="assets/review_fatima_alnoor.jpeg" alt="Fatima Al-Noor" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.opacity='1';">
+                            <div class="review-avatar-text">FA</div>
+                        </div>
+                        <div class="review-info">
+                            <h4>Fatima Al-Noor</h4>
+                            <p data-en="Cybersecurity Specialist" data-ar="أخصائية أمن سيبراني">Cybersecurity Specialist</p>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text" data-en="Outstanding platform! The cybersecurity courses are top-notch and the practical exercises are excellent. I landed my dream job after completing the advanced course." data-ar="منصة رائعة! دورات الأمن السيبراني على أعلى مستوى والتمارين العملية ممتازة. حصلت على وظيفة أحلامي بعد إكمال الدورة المتقدمة.">Outstanding platform! The cybersecurity courses are top-notch and the practical exercises are excellent. I landed my dream job after completing the advanced course.</p>
+                    <div class="review-course" data-en="Enrolled in: Advanced Cybersecurity" data-ar="مسجل في: الأمن السيبراني المتقدم">Enrolled in: Advanced Cybersecurity</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <img src="assets/review_youssef_khalil.jpeg" alt="Youssef Khalil" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.opacity='1';">
+                            <div class="review-avatar-text">YK</div>
+                        </div>
+                        <div class="review-info">
+                            <h4>Youssef Khalil</h4>
+                            <p data-en="Full-Stack Developer" data-ar="مطور Full-Stack">Full-Stack Developer</p>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text" data-en="The Full-Stack Web Development course is comprehensive and well-structured. The instructors provide excellent support and the projects are real-world applicable." data-ar="دورة تطوير تطبيقات الويب الكاملة شاملة ومنظمة بشكل ممتاز. المدربون يقدمون دعم ممتاز والمشاريع قابلة للتطبيق في العالم الحقيقي.">The Full-Stack Web Development course is comprehensive and well-structured. The instructors provide excellent support and the projects are real-world applicable.</p>
+                    <div class="review-course" data-en="Enrolled in: Full-Stack Web Development" data-ar="مسجل في: تطوير تطبيقات الويب الكاملة">Enrolled in: Full-Stack Web Development</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <img src="assets/review_lina_ahmad.jpeg" alt="Lina Al-Ahmad" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.opacity='1';">
+                            <div class="review-avatar-text">LA</div>
+                        </div>
+                        <div class="review-info">
+                            <h4>Lina Al-Ahmad</h4>
+                            <p data-en="Financial Analyst" data-ar="محللة مالية">Financial Analyst</p>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text" data-en="Excellent accounting courses with practical examples. The instructors explain complex concepts clearly. The platform's flexibility allows me to learn at my own pace." data-ar="دورات محاسبة ممتازة مع أمثلة عملية. المدربون يشرحون المفاهيم المعقدة بوضوح. مرونة المنصة تسمح لي بالتعلم بوتيرتي الخاصة.">Excellent accounting courses with practical examples. The instructors explain complex concepts clearly. The platform's flexibility allows me to learn at my own pace.</p>
+                    <div class="review-course" data-en="Enrolled in: Advanced Financial Accounting" data-ar="مسجل في: المحاسبة المالية المتقدمة">Enrolled in: Advanced Financial Accounting</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="courses">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-en="Explore Our Courses" data-ar="استكشف دوراتنا">Explore Our Courses</h2>
+                <p data-en="Choose from hundreds of professional courses across multiple disciplines" data-ar="اختر من بين مئات الدورات المهنية عبر تخصصات متعددة">Choose from hundreds of professional courses across multiple disciplines</p>
+            </div>
+            <div class="courses-filter">
+                <button class="filter-btn active" data-filter="all" data-en="All Courses" data-ar="جميع الدورات">All Courses</button>
+                <button class="filter-btn" data-filter="it" data-en="Information Technology" data-ar="تقنية المعلومات">Information Technology</button>
+                <button class="filter-btn" data-filter="accounting" data-en="Accounting" data-ar="المحاسبة">Accounting</button>
+                <button class="filter-btn" data-filter="business" data-en="Business" data-ar="إدارة الأعمال">Business</button>
+                <button class="filter-btn" data-filter="law" data-en="Law" data-ar="القانون">Law</button>
+            </div>
+            <div class="courses-grid" id="coursesGrid">
+            </div>
+        </div>
+    </section>
+
+    <section class="section tech-visualization-section" id="tech-viz">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-en="Advanced Learning Technology & Secure Environment" data-ar="تقنيات التعلم المتقدمة والبيئة الآمنة">Advanced Learning Technology & Secure Environment</h2>
+                <p data-en="We leverage cutting-edge educational technology to deliver world-class learning experiences. Our secure platform ensures your data and learning progress are protected with enterprise-grade security." data-ar="نستخدم أحدث تقنيات التعليم لتقديم تجارب تعليمية على مستوى عالمي. منصتنا الآمنة تضمن حماية بياناتك وتقدمك التعليمي بأمان على مستوى المؤسسات">We leverage cutting-edge educational technology to deliver world-class learning experiences. Our secure platform ensures your data and learning progress are protected with enterprise-grade security.</p>
+            </div>
+            <div class="tech-viz-grid">
+                <div class="tech-viz-card ai-viz">
+                    <div class="viz-header">
+                        <h3 data-en="AI-Powered Learning Assistant" data-ar="مساعد التعلم المدعوم بالذكاء الاصطناعي">AI-Powered Learning Assistant</h3>
+                        <p data-en="Personalized learning paths and intelligent course recommendations" data-ar="مسارات تعليمية مخصصة وتوصيات ذكية للدورات">Personalized learning paths and intelligent course recommendations</p>
+                    </div>
+                    <div class="matrix-container" id="aiMatrix">
+                        <canvas id="aiCanvas"></canvas>
+                        <div class="viz-overlay">
+                            <div class="learning-path">
+                                <div class="path-node active"><i class="fas fa-book"></i></div>
+                                <div class="path-line"></div>
+                                <div class="path-node"><i class="fas fa-brain"></i></div>
+                                <div class="path-line"></div>
+                                <div class="path-node"><i class="fas fa-certificate"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="viz-info">
+                        <div class="viz-stat">
+                            <span class="viz-stat-number">50K+</span>
+                            <span class="viz-stat-label" data-en="Students Helped" data-ar="طالب تم مساعدته">Students Helped</span>
+                        </div>
+                        <div class="viz-stat">
+                            <span class="viz-stat-number">95%</span>
+                            <span class="viz-stat-label" data-en="Satisfaction" data-ar="رضا">Satisfaction</span>
+                        </div>
+                        <div class="viz-stat">
+                            <span class="viz-stat-number">24/7</span>
+                            <span class="viz-stat-label" data-en="Support" data-ar="دعم">Support</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-viz-card cyber-viz">
+                    <div class="viz-header">
+                        <h3 data-en="Secure Learning Environment" data-ar="بيئة تعليمية آمنة">Secure Learning Environment</h3>
+                        <p data-en="Advanced security protocols protecting student data and learning progress" data-ar="بروتوكولات أمنية متقدمة تحمي بيانات الطلاب وتقدمهم التعليمي">Advanced security protocols protecting student data and learning progress</p>
+                    </div>
+                    <div class="matrix-container" id="cyberMatrix">
+                        <canvas id="cyberCanvas"></canvas>
+                        <div class="viz-overlay">
+                            <div class="security-shield">
+                                <div class="shield-layer"></div>
+                                <div class="shield-layer"></div>
+                                <div class="shield-layer"></div>
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="viz-info">
+                        <div class="viz-stat">
+                            <span class="viz-stat-number">99.9%</span>
+                            <span class="viz-stat-label" data-en="Data Protection" data-ar="حماية البيانات">Data Protection</span>
+                        </div>
+                        <div class="viz-stat">
+                            <span class="viz-stat-number">SSL</span>
+                            <span class="viz-stat-label" data-en="Encryption" data-ar="تشفير">Encryption</span>
+                        </div>
+                        <div class="viz-stat">
+                            <span class="viz-stat-number">ISO</span>
+                            <span class="viz-stat-label" data-en="Certified" data-ar="معتمد">Certified</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section about-section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-en="About Our Platform" data-ar="عن منصتنا">About Our Platform</h2>
+                <p data-en="Empowering professionals worldwide through cutting-edge education and industry expertise" data-ar="تمكين المحترفين حول العالم من خلال التعليم المتقدم والخبرة الصناعية">Empowering professionals worldwide through cutting-edge education and industry expertise</p>
+            </div>
+            <div class="about-content">
+                <div class="about-main">
+                    <div class="about-text">
+                        <h3 data-en="Our Mission" data-ar="مهمتنا">Our Mission</h3>
+                        <p data-en="We are dedicated to transforming careers through world-class online education. Our mission is to make professional development accessible, engaging, and results-driven for learners worldwide." data-ar="نحن ملتزمون بتحويل المسارات المهنية من خلال التعليم الإلكتروني على مستوى عالمي. مهمتنا هي جعل التطوير المهني في متناول الجميع، وجذاباً، وموجهاً للنتائج للمتعلمين حول العالم.">We are dedicated to transforming careers through world-class online education. Our mission is to make professional development accessible, engaging, and results-driven for learners worldwide.</p>
+                        <h3 data-en="Why Choose Us" data-ar="لماذا تختارنا">Why Choose Us</h3>
+                        <ul class="about-features">
+                            <li><i class="fas fa-check-circle"></i> <span data-en="Industry-leading instructors with real-world experience" data-ar="مدربون رائدون في الصناعة مع خبرة عملية حقيقية">Industry-leading instructors with real-world experience</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-en="AI-powered learning assistant for personalized guidance" data-ar="مساعد تعليمي مدعوم بالذكاء الاصطناعي للتوجيه المخصص">AI-powered learning assistant for personalized guidance</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-en="Comprehensive learning roadmaps for every specialization" data-ar="خرائط طريق تعليمية شاملة لكل تخصص">Comprehensive learning roadmaps for every specialization</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-en="Industry-recognized certifications" data-ar="شهادات معترف بها في الصناعة">Industry-recognized certifications</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-en="Flexible learning at your own pace" data-ar="تعلم مرن بوتيرتك الخاصة">Flexible learning at your own pace</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span data-en="24/7 support and lifetime access" data-ar="دعم على مدار الساعة ووصول مدى الحياة">24/7 support and lifetime access</span></li>
+                        </ul>
+                    </div>
+                    <div class="about-stats-mini">
+                        <div class="about-stat-box">
+                            <div class="about-stat-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <div class="about-stat-info">
+                                <h4 data-en="Quality Education" data-ar="تعليم عالي الجودة">Quality Education</h4>
+                                <p data-en="World-class curriculum designed by industry experts" data-ar="منهج على مستوى عالمي مصمم من قبل خبراء الصناعة">World-class curriculum designed by industry experts</p>
+                            </div>
+                        </div>
+                        <div class="about-stat-box">
+                            <div class="about-stat-icon"><i class="fas fa-users"></i></div>
+                            <div class="about-stat-info">
+                                <h4 data-en="Global Community" data-ar="مجتمع عالمي">Global Community</h4>
+                                <p data-en="Join thousands of learners from 120+ countries" data-ar="انضم إلى آلاف المتعلمين من أكثر من 120 دولة">Join thousands of learners from 120+ countries</p>
+                            </div>
+                        </div>
+                        <div class="about-stat-box">
+                            <div class="about-stat-icon"><i class="fas fa-trophy"></i></div>
+                            <div class="about-stat-info">
+                                <h4 data-en="Proven Results" data-ar="نتائج مثبتة">Proven Results</h4>
+                                <p data-en="95% success rate with 4.2x average salary increase" data-ar="95% معدل نجاح مع 4.2x متوسط زيادة في الراتب">95% success rate with 4.2x average salary increase</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-en="Get In Touch" data-ar="تواصل معنا">Get In Touch</h2>
+                <p data-en="Have questions? We're here to help. Reach out to us and we'll respond as soon as possible" data-ar="لديك أسئلة؟ نحن هنا للمساعدة. تواصل معنا وسنرد في أقرب وقت ممكن">Have questions? We're here to help. Reach out to us and we'll respond as soon as possible</p>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <div class="contact-info-card">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <h3 data-en="Email Us" data-ar="راسلنا">Email Us</h3>
+                        <p data-en="Send us an email anytime" data-ar="أرسل لنا بريد إلكتروني في أي وقت">Send us an email anytime</p>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
+                            <a href="mailto:marahsaeed93@gmail.com">marahsaeed93@gmail.com</a>
+                            <a href="mailto:salmaghaireh@gmail.com">salmaghaireh@gmail.com</a>
+                            <a href="mailto:raniabaniatta@gmail.com">raniabaniatta@gmail.com</a>
+                            <a href="mailto:arefahahmmad@gmail.com">arefahahmmad@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <h3 data-en="Call Us" data-ar="اتصل بنا">Call Us</h3>
+                        <p data-en="Mon-Fri 9am-6pm" data-ar="الاثنين-الجمعة 9 صباحاً-6 مساءً">Mon-Fri 9am-6pm</p>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
+                            <a href="tel:0790719609">07 9071 9609</a>
+                            <a href="tel:0777853069">0777853069</a>
+                            <a href="tel:0777571209">0777571209</a>
+                            <a href="tel:0788513603">0788513603</a>
+                        </div>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <h3 data-en="Visit Us" data-ar="زرنا">Visit Us</h3>
+                        <p data-en="Our headquarters" data-ar="مقرنا الرئيسي">Our headquarters</p>
+                        <address data-en="AMMAN JORDAN 21110 BUSINESS COMPOUND ALABDALY" data-ar="عمان الأردن 21110 مجمع الأعمال العبدلي">AMMAN JORDAN 21110 BUSINESS COMPOUND ALABDALY</address>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" action="contact.php" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contact-name" data-en="Full Name" data-ar="الاسم الكامل">Full Name *</label>
+                                <input type="text" id="contact-name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email" data-en="Email Address" data-ar="البريد الإلكتروني">Email Address *</label>
+                                <input type="email" id="contact-email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contact-phone" data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
+                                <input type="tel" id="contact-phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-subject" data-en="Subject" data-ar="الموضوع">Subject</label>
+                                <input type="text" id="contact-subject" name="subject">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message" data-en="Message" data-ar="الرسالة">Message *</label>
+                            <textarea id="contact-message" name="message" rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit-contact">
+                            <i class="fas fa-paper-plane"></i>
+                            <span data-en="Send Message" data-ar="إرسال الرسالة">Send Message</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4 data-en="About" data-ar="عن">About</h4>
+                <ul>
+                    <li><a href="#team" data-en="Our Team" data-ar="فريقنا">Our Team</a></li>
+                    <li><a href="#services" data-en="Services" data-ar="الخدمات">Services</a></li>
+                    <li><a href="#courses" data-en="Courses" data-ar="الدورات">Courses</a></li>
+                </ul>
+        </div>
+            <div class="footer-section">
+                <h4 data-en="Categories" data-ar="التصنيفات">Categories</h4>
+                <ul>
+                    <li><a href="#" data-filter="it" data-en="IT & Technology" data-ar="تقنية المعلومات">IT & Technology</a></li>
+                    <li><a href="#" data-filter="accounting" data-en="Accounting" data-ar="المحاسبة">Accounting</a></li>
+                    <li><a href="#" data-filter="business" data-en="Business" data-ar="إدارة الأعمال">Business</a></li>
+                    <li><a href="#" data-filter="law" data-en="Law" data-ar="القانون">Law</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4 data-en="Support" data-ar="الدعم">Support</h4>
+                <ul>
+                    <li><a href="#" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a></li>
+                    <li><a href="contact.php" data-en="Contact Us" data-ar="اتصل بنا">Contact Us</a></li>
+                    <li><a href="#" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4 data-en="Follow Us" data-ar="تابعنا">Follow Us</h4>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Premium Learning Platform. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="chatbot-container">
+        <button class="chatbot-button" id="chatbotToggle">
+            <i class="fas fa-comments"></i>
+        </button>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <h3 data-en="AI Learning Assistant" data-ar="مساعد التعلم الذكي">AI Learning Assistant</h3>
+                <button class="chatbot-close" id="chatbotClose">
+                    <i class="fas fa-times"></i>
+                </button>
+    </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot" data-en="Hello! I'm your AI learning assistant. How can I help you find the perfect course today?" data-ar="مرحباً! أنا مساعدك الذكي للتعلم. كيف يمكنني مساعدتك في العثور على الدورة المثالية اليوم؟">Hello! I'm your AI learning assistant. How can I help you find the perfect course today?</div>
+            </div>
+            <div class="chatbot-quick-actions" style="padding: 10px; border-top: 1px solid #e0e0e0; display: flex; gap: 8px; flex-wrap: wrap;">
+                <button onclick="chatbot.showEnrollmentInstructions()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" data-en="📋 Enrollment Instructions" data-ar="📋 تعليمات التسجيل">📋 Enrollment Instructions</button>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Type your message..." onkeypress="if(event.key==='Enter') chatbot.sendMessage()">
+                <button onclick="chatbot.sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'en';
+        const chatbotApiUrl = 'http://localhost:5000/api/chat';
+
+        function switchLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            
+            document.querySelectorAll('[data-en][data-ar]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${lang}`);
+            });
+            
+            const chatbotInput = document.getElementById('chatbotInput');
+            if (chatbotInput) {
+                chatbotInput.placeholder = lang === 'ar' ? 'اكتب رسالتك...' : 'Type your message...';
+            }
+            
+            const quickActions = document.querySelectorAll('.chatbot-quick-actions [data-en][data-ar]');
+            quickActions.forEach(el => {
+                el.textContent = el.getAttribute(`data-${lang}`);
+            });
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+            });
+        }
+
+        const courses = [
+            {
+                id: 1,
+                title: "Advanced Cybersecurity",
+                titleAr: "الأمن السيبراني المتقدم",
+                category: "it",
+                categoryName: "Cybersecurity",
+                categoryNameAr: "الأمن السيبراني",
+                description: "Comprehensive course covering cybersecurity fundamentals, network protection, vulnerability assessment, and incident management. Gain practical knowledge in modern security tools.",
+                descriptionAr: "دورة شاملة تغطي أساسيات الأمن السيبراني، حماية الشبكات، اكتشاف الثغرات، وإدارة الحوادث الأمنية.",
+                instructor: "Dr. Mohammed Al-Ahmad",
+                instructorAr: "د. محمد الأحمد",
+                price: 450,
+                rating: 4.8,
+                image: "assets/cybersecurity1.jpeg",
+                hours: 120,
+                level: "Advanced",
+                levelAr: "متقدم"
+            },
+            {
+                id: 2,
+                title: "Cybersecurity Fundamentals for Beginners",
+                titleAr: "أساسيات الأمن السيبراني للمبتدئين",
+                category: "it",
+                categoryName: "Cybersecurity",
+                categoryNameAr: "الأمن السيبراني",
+                description: "Complete introduction to cybersecurity. Learn how to protect data and networks from electronic threats.",
+                descriptionAr: "مقدمة شاملة لعالم الأمن السيبراني. تعلم كيفية حماية البيانات والشبكات من التهديدات الإلكترونية.",
+                instructor: "Ms. Sarah Al-Khalid",
+                instructorAr: "أ. سارة الخالد",
+                price: 250,
+                rating: 4.6,
+                image: "assets/CYBERSECURITY3.jpeg",
+                hours: 60,
+                level: "Beginner",
+                levelAr: "مبتدئ"
+            },
+            {
+                id: 3,
+                title: "Professional Software Engineering",
+                titleAr: "هندسة البرمجيات الاحترافية",
+                category: "it",
+                categoryName: "Software Engineering",
+                categoryNameAr: "هندسة البرمجيات",
+                description: "Learn software development methodologies, requirements engineering, architectural design, and project management. Practical course covering the complete software development lifecycle.",
+                descriptionAr: "تعلم منهجيات تطوير البرمجيات، هندسة المتطلبات، التصميم المعماري، وإدارة المشاريع البرمجية.",
+                instructor: "Eng. Ahmed Ali",
+                instructorAr: "م. أحمد علي",
+                price: 500,
+                rating: 4.9,
+                image: "assets/PROGRAMMING1.jpeg",
+                hours: 150,
+                level: "Advanced",
+                levelAr: "متقدم"
+            },
+            {
+                id: 4,
+                title: "Full-Stack Web Development",
+                titleAr: "تطوير تطبيقات الويب الكاملة",
+                category: "it",
+                categoryName: "Software Engineering",
+                categoryNameAr: "هندسة البرمجيات",
+                description: "Complete course to learn web application development from scratch. Covers Frontend, Backend, and Databases.",
+                descriptionAr: "دورة متكاملة لتعلم تطوير تطبيقات الويب من الصفر. تغطي Frontend و Backend وقواعد البيانات.",
+                instructor: "Eng. Khaled Al-Dosari",
+                instructorAr: "م. خالد الدوسري",
+                price: 400,
+                rating: 4.7,
+                image: "assets/PROGRAMMING1.jpeg",
+                hours: 100,
+                level: "Intermediate",
+                levelAr: "متوسط"
+            },
+            {
+                id: 5,
+                title: "Computer Science Fundamentals",
+                titleAr: "علوم الحاسوب الأساسية",
+                category: "it",
+                categoryName: "Computer Science",
+                categoryNameAr: "علم الحاسوب",
+                description: "Comprehensive introduction to computer science including algorithms, data structures, databases, and operating systems.",
+                descriptionAr: "مقدمة شاملة لعلوم الحاسوب تشمل الخوارزميات، هياكل البيانات، قواعد البيانات، وأنظمة التشغيل.",
+                instructor: "Dr. Fatima Al-Noor",
+                instructorAr: "د. فاطمة النور",
+                price: 300,
+                rating: 4.5,
+                image: "assets/COMPUTERSCINCE1.jpeg",
+                hours: 80,
+                level: "Beginner",
+                levelAr: "مبتدئ"
+            },
+            {
+                id: 6,
+                title: "Advanced Algorithms and Data Structures",
+                titleAr: "الخوارزميات وهياكل البيانات المتقدمة",
+                category: "it",
+                categoryName: "Computer Science",
+                categoryNameAr: "علم الحاسوب",
+                description: "Deep dive into complex algorithms and advanced data structures. Solve programming problems with high efficiency.",
+                descriptionAr: "تعمق في الخوارزميات المعقدة وهياكل البيانات المتقدمة. حل المشاكل البرمجية بكفاءة عالية.",
+                instructor: "Dr. Youssef Al-Maliki",
+                instructorAr: "د. يوسف المالكي",
+                price: 450,
+                rating: 4.8,
+                image: "assets/COMPUTERSCINCE1.jpeg",
+                hours: 120,
+                level: "Advanced",
+                levelAr: "متقدم"
+            },
+            {
+                id: 7,
+                title: "Artificial Intelligence and Machine Learning",
+                titleAr: "الذكاء الاصطناعي والتعلم الآلي",
+                category: "it",
+                categoryName: "Artificial Intelligence",
+                categoryNameAr: "الذكاء الاصطناعي",
+                description: "Comprehensive course in AI and ML. Learn to build intelligent models using Python and TensorFlow.",
+                descriptionAr: "دورة شاملة في الذكاء الاصطناعي والتعلم الآلي. تعلم بناء نماذج ذكية باستخدام Python و TensorFlow.",
+                instructor: "Dr. Ali Al-Hussein",
+                instructorAr: "د. علي الحسين",
+                price: 550,
+                rating: 4.9,
+                image: "assets/AI1.jpeg",
+                hours: 140,
+                level: "Advanced",
+                levelAr: "متقدم"
+            },
+            {
+                id: 8,
+                title: "Natural Language Processing",
+                titleAr: "معالجة اللغة الطبيعية",
+                category: "it",
+                categoryName: "Artificial Intelligence",
+                categoryNameAr: "الذكاء الاصطناعي",
+                description: "Learn how to build systems that understand natural language and process text. Practical applications in Chatbots and sentiment analysis.",
+                descriptionAr: "تعلم كيفية بناء أنظمة تفهم اللغة الطبيعية وتعالج النصوص. تطبيقات عملية في Chatbots وتحليل المشاعر.",
+                instructor: "Dr. Nora Al-Saeed",
+                instructorAr: "د. نورا السعيد",
+                price: 480,
+                rating: 4.7,
+                image: "assets/AI3.jpeg",
+                hours: 110,
+                level: "Intermediate",
+                levelAr: "متوسط"
+            },
+            {
+                id: 9,
+                title: "Advanced Financial Accounting",
+                titleAr: "المحاسبة المالية المتقدمة",
+                category: "accounting",
+                categoryName: "Accounting",
+                categoryNameAr: "المحاسبة",
+                description: "Specialized course in financial accounting covering international accounting standards, financial statement preparation, and financial analysis.",
+                descriptionAr: "دورة متخصصة في المحاسبة المالية تغطي المعايير المحاسبية الدولية، إعداد القوائم المالية، والتحليل المالي.",
+                instructor: "Dr. Mahmoud Al-Ali",
+                instructorAr: "د. محمود العلي",
+                price: 350,
+                rating: 4.6,
+                image: "assets/ACCOUNTING1.jpeg",
+                hours: 90,
+                level: "Advanced",
+                levelAr: "متقدم"
+            },
+            {
+                id: 10,
+                title: "Accounting Fundamentals for Beginners",
+                titleAr: "أساسيات المحاسبة للمبتدئين",
+                category: "accounting",
+                categoryName: "Accounting",
+                categoryNameAr: "المحاسبة",
+                description: "Complete introduction to accounting. Learn basic principles, accounting entries, and bookkeeping.",
+                descriptionAr: "مقدمة شاملة لعالم المحاسبة. تعلم المبادئ الأساسية، القيود المحاسبية، وإعداد الدفاتر.",
+                instructor: "Ms. Lina Salama",
+                instructorAr: "أ. لينا سلامة",
+                price: 200,
+                rating: 4.5,
+                image: "assets/ACCOUNTING2.jpeg",
+                hours: 50,
+                level: "Beginner",
+                levelAr: "مبتدئ"
+            },
+            {
+                id: 11,
+                title: "Managerial Accounting and Costing",
+                titleAr: "المحاسبة الإدارية والتكاليف",
+                category: "accounting",
+                categoryName: "Accounting",
+                categoryNameAr: "المحاسبة",
+                description: "Learn how to use accounting information in management decision-making. Cost analysis and financial planning.",
+                descriptionAr: "تعلم كيفية استخدام المعلومات المحاسبية في اتخاذ القرارات الإدارية. تحليل التكاليف والتخطيط المالي.",
+                instructor: "Dr. Sami Al-Qadi",
+                instructorAr: "د. سامي القاضي",
+                price: 380,
+                rating: 4.7,
+                image: "assets/ACCOUNTING1.jpeg",
+                hours: 100,
+                level: "Intermediate",
+                levelAr: "متوسط"
+            },
+            {
+                id: 12,
+                title: "Strategic Business Management",
+                titleAr: "إدارة الأعمال الاستراتيجية",
+                category: "business",
+                categoryName: "Business Management",
+                categoryNameAr: "إدارة الأعمال",
+                description: "Comprehensive course in business management covering strategic planning, human resource management, and marketing.",
+                descriptionAr: "دورة شاملة في إدارة الأعمال تغطي التخطيط الاستراتيجي، إدارة الموارد البشرية، والتسويق.",
+                instructor: "Dr. Reem Al-Abdullah",
+                instructorAr: "د. ريم العبدالله",
+                price: 420,
+                rating: 4.8,
+                image: "assets/business_management.jpeg",
+                hours: 110,
+                level: "Advanced",
+                levelAr: "متقدم"
+            },
+            {
+                id: 13,
+                title: "Entrepreneurship and Project Management",
+                titleAr: "ريادة الأعمال وإدارة المشاريع",
+                category: "business",
+                categoryName: "Business Management",
+                categoryNameAr: "إدارة الأعمال",
+                description: "Learn how to create and manage your own business. From idea to execution and marketing.",
+                descriptionAr: "تعلم كيفية إنشاء وإدارة مشروعك الخاص. من الفكرة إلى التنفيذ والتسويق.",
+                instructor: "Eng. Khaled Al-Mutairi",
+                instructorAr: "م. خالد المطيري",
+                price: 400,
+                rating: 4.7,
+                image: "assets/entrepreneurship.jpeg",
+                hours: 95,
+                level: "Intermediate",
+                levelAr: "متوسط"
+            },
+            {
+                id: 14,
+                title: "Digital Marketing",
+                titleAr: "التسويق الرقمي والإلكتروني",
+                category: "business",
+                categoryName: "Business Management",
+                categoryNameAr: "إدارة الأعمال",
+                description: "Master the art of digital marketing. Learn SEO, Google Ads, social media marketing.",
+                descriptionAr: "إتقان فن التسويق الرقمي. تعلم SEO، إعلانات Google، التسويق عبر وسائل التواصل الاجتماعي.",
+                instructor: "Ms. Nora Al-Ahmad",
+                instructorAr: "أ. نورا الأحمد",
+                price: 350,
+                rating: 4.6,
+                image: "assets/DIGITALMARKETING1.jpeg",
+                hours: 85,
+                level: "Intermediate",
+                levelAr: "متوسط"
+            },
+            {
+                id: 15,
+                title: "Commercial Law and Companies",
+                titleAr: "القانون التجاري والشركات",
+                category: "law",
+                categoryName: "Law",
+                categoryNameAr: "القانون",
+                description: "Specialized course in commercial law. Learn company laws, commercial contracts, and intellectual property rights.",
+                descriptionAr: "دورة متخصصة في القانون التجاري. تعلم قوانين الشركات، العقود التجارية، وحقوق الملكية الفكرية.",
+                instructor: "Dr. Fahd Al-Salem",
+                instructorAr: "د. فهد السالم",
+                price: 450,
+                rating: 4.7,
+                image: "assets/law1.jpeg",
+                hours: 120,
+                level: "Advanced",
+                levelAr: "متقدم"
+            },
+            {
+                id: 16,
+                title: "Civil Law and Contracts",
+                titleAr: "القانون المدني والعقود",
+                category: "law",
+                categoryName: "Law",
+                categoryNameAr: "القانون",
+                description: "Comprehensive introduction to civil law. Understand types of contracts, obligations, and civil rights.",
+                descriptionAr: "مقدمة شاملة للقانون المدني. فهم أنواع العقود، الالتزامات، والحقوق المدنية.",
+                instructor: "Dr. Mona Al-Hassan",
+                instructorAr: "د. منى الحسن",
+                price: 380,
+                rating: 4.6,
+                image: "assets/law2.jpeg",
+                hours: 100,
+                level: "Intermediate",
+                levelAr: "متوسط"
+            }
+        ];
+
+        function renderCourses(filter = 'all') {
+            const grid = document.getElementById('coursesGrid');
+            const filteredCourses = filter === 'all' 
+                ? courses 
+                : courses.filter(course => course.category === filter);
+
+            grid.innerHTML = filteredCourses.map(course => {
+                const title = currentLang === 'en' ? course.title : course.titleAr;
+                const category = currentLang === 'en' ? course.categoryName : course.categoryNameAr;
+                const description = currentLang === 'en' ? course.description : course.descriptionAr;
+                const instructor = currentLang === 'en' ? course.instructor : course.instructorAr;
+                const level = currentLang === 'en' ? course.level : course.levelAr;
+                const enrollText = currentLang === 'en' ? 'Enroll Now' : 'سجل الآن';
+
+                return `
+                    <div class="course-card" data-category="${course.category}">
+                        <div class="course-image">
+                            <img src="${course.image}" alt="${title}" loading="eager" decoding="async" width="400" height="280" style="image-rendering:auto; -ms-interpolation-mode:bicubic;" onload="this.style.imageRendering='auto';" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="course-image-fallback" style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-size:3rem; color:white; background:linear-gradient(135deg, #6366f1, #ec4899);">📚</div>
+                            <span class="course-badge">${level}</span>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-category">${category}</div>
+                            <h3 class="course-title">${title}</h3>
+                            <p class="course-description">${description}</p>
+                            <div class="course-instructor">
+                                <i class="fas fa-user"></i>
+                                <span>${instructor}</span>
+                            </div>
+                            <div class="course-footer">
+                                <div class="course-price">$${course.price}</div>
+                                <div class="course-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>${course.rating}</span>
+                                </div>
+                            </div>
+                            <a href="checkout.php?course_id=${course.id}" class="btn-enroll">${enrollText}</a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderCourses(btn.dataset.filter);
+            });
+        });
+
+        document.querySelectorAll('.footer-section a[data-filter]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const filter = link.dataset.filter;
+                document.querySelector(`.filter-btn[data-filter="${filter}"]`).click();
+                window.scrollTo({ top: document.getElementById('courses').offsetTop, behavior: 'smooth' });
+            });
+        });
+
+        renderCourses();
+
+        const chatbot = {
+            isOpen: false,
+            conversation: [],
+
+            init() {
+                document.getElementById('chatbotToggle').addEventListener('click', () => this.toggle());
+                document.getElementById('chatbotClose').addEventListener('click', () => this.toggle());
+                document.getElementById('chatbotInput').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.sendMessage();
+                });
+            },
+
+            toggle() {
+                this.isOpen = !this.isOpen;
+                const window = document.getElementById('chatbotWindow');
+                window.classList.toggle('active', this.isOpen);
+            },
+
+            async sendMessage() {
+                const input = document.getElementById('chatbotInput');
+                const message = input.value.trim();
+                if (!message) return;
+
+                this.addUserMessage(message);
+                input.value = '';
+                
+                const loadingMsg = this.addBotMessage(currentLang === 'en' ? 'Thinking...' : 'أفكر...', true);
+                loadingMsg.classList.add('loading');
+
+                try {
+                    const response = await fetch(chatbotApiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            message: message,
+                            history: this.conversation
+                        })
+                    });
+
+                    const data = await response.json();
+                    
+                    if (loadingMsg) {
+                        loadingMsg.remove();
+                    }
+                    
+                    if (data.roadmap) {
+                        this.addBotMessage(data.roadmap, true);
+                    } else {
+                        this.addBotMessage(data.response, true);
+                    }
+                    
+                    if (data.recommendations && data.recommendations.length > 0) {
+                        setTimeout(() => {
+                            this.showRecommendations(data.recommendations);
+                        }, 500);
+                    }
+                } catch (error) {
+                    console.error('Chatbot error:', error);
+                    if (loadingMsg) loadingMsg.remove();
+                    this.addBotMessage(currentLang === 'en' 
+                        ? "I'm having trouble connecting. Please make sure the chatbot server is running (start_chatbot.bat)." 
+                        : "أواجه مشكلة في الاتصال. يرجى التأكد من أن خادم الشات بوت يعمل (start_chatbot.bat).");
+                }
+            },
+
+            showRecommendations(recommendations) {
+                const recText = recommendations.map(r => 
+                    `• ${r.title} - $${r.price} (Rating: ${r.rating}⭐) - ${r.hours || 0} hours`
+                ).join('\n');
+                this.addBotMessage(currentLang === 'en'
+                    ? `Here are some courses I recommend:\n\n${recText}\n\nWould you like a complete roadmap for this field?`
+                    : `إليك بعض الدورات التي أنصح بها:\n\n${recText}\n\nهل تريد خارطة طريق كاملة لهذا المجال؟`, true);
+            },
+
+            addBotMessage(text, isHTML = false) {
+                const messagesDiv = document.getElementById('chatbotMessages');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message bot';
+                if (isHTML) {
+                    // Enhanced formatting for better readability
+                    let formattedText = text
+                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+                        .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic
+                        .replace(/```([\s\S]*?)```/g, '<pre style="background: #f5f5f5; padding: 10px; border-radius: 5px; margin: 10px 0; overflow-x: auto;"><code>$1</code></pre>') // Code blocks
+                        .replace(/`([^`]+)`/g, '<code style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-family: monospace;">$1</code>') // Inline code
+                        .replace(/^### (.*$)/gim, '<h3 style="margin: 15px 0 10px 0; font-size: 1.1em; font-weight: 700;">$1</h3>') // H3
+                        .replace(/^## (.*$)/gim, '<h2 style="margin: 20px 0 15px 0; font-size: 1.2em; font-weight: 700;">$1</h2>') // H2
+                        .replace(/^# (.*$)/gim, '<h1 style="margin: 20px 0 15px 0; font-size: 1.3em; font-weight: 700;">$1</h1>') // H1
+                        .replace(/^•\s+(.*$)/gim, '<li style="margin: 5px 0; padding-left: 5px;">$1</li>') // Bullet points
+                        .replace(/^-\s+(.*$)/gim, '<li style="margin: 5px 0; padding-left: 5px;">$1</li>') // Dashes
+                        .replace(/^\d+\.\s+(.*$)/gim, '<li style="margin: 5px 0; padding-left: 5px; list-style-type: decimal;">$1</li>') // Numbered
+                        .replace(/\n/g, '<br>');
+                    
+                    // Wrap lists in ul tags
+                    formattedText = formattedText.replace(/(<li[^>]*>.*?<\/li>)/g, '<ul style="margin: 10px 0; padding-left: 20px;">$1</ul>');
+                    formattedText = formattedText.replace(/<\/ul>\s*<ul[^>]*>/g, '');
+                    
+                    messageDiv.innerHTML = formattedText;
+                } else {
+                    messageDiv.textContent = text;
+                }
+                messagesDiv.appendChild(messageDiv);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                this.conversation.push({user: '', bot: text});
+                return messageDiv;
+            },
+
+            addUserMessage(text) {
+                const messagesDiv = document.getElementById('chatbotMessages');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message user';
+                messageDiv.textContent = text;
+                messagesDiv.appendChild(messageDiv);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                this.conversation.push({user: text, bot: ''});
+            },
+
+            async showEnrollmentInstructions() {
+                const instructionText = currentLang === 'en' 
+                    ? 'Show me enrollment instructions'
+                    : 'أريد تعليمات التسجيل';
+                this.addUserMessage(instructionText);
+                
+                const loadingMsg = this.addBotMessage(currentLang === 'en' ? 'Loading...' : 'جاري التحميل...', true);
+                loadingMsg.classList.add('loading');
+                
+                try {
+                    const response = await fetch(chatbotApiUrl, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            message: instructionText,
+                            history: this.conversation
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    if (loadingMsg) loadingMsg.remove();
+                    this.addBotMessage(data.response, true);
+                } catch (error) {
+                    console.error('Chatbot error:', error);
+                    if (loadingMsg) loadingMsg.remove();
+                    this.addBotMessage(currentLang === 'en' 
+                        ? "I'm having trouble connecting. Please make sure the chatbot server is running (start_chatbot.bat)." 
+                        : "أواجه مشكلة في الاتصال. يرجى التأكد من أن خادم الشات بوت يعمل (start_chatbot.bat).");
+                }
+            }
+        };
+
+        chatbot.init();
+
+        function searchCourses() {
+            const search = document.getElementById('courseSearchInput').value.toLowerCase();
+            if (!search) return;
+            const filtered = courses.filter(c => {
+                const title = (currentLang === 'en' ? c.title : c.titleAr).toLowerCase();
+                const desc = (currentLang === 'en' ? c.description : c.descriptionAr).toLowerCase();
+                return title.includes(search) || desc.includes(search);
+            });
+            if (filtered.length > 0) {
+                renderCourses('all');
+                const grid = document.getElementById('coursesGrid');
+                const allCards = grid.querySelectorAll('.course-card');
+                allCards.forEach(card => {
+                    const title = card.querySelector('.course-title').textContent.toLowerCase();
+                    const desc = card.querySelector('.course-description').textContent.toLowerCase();
+                    if (!title.includes(search) && !desc.includes(search)) {
+                        card.style.display = 'none';
+                    } else {
+                        card.style.display = 'block';
+                    }
+                });
+                document.getElementById('courses').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                alert(currentLang === 'en' ? 'No courses found matching your search' : 'لم يتم العثور على دورات تطابق البحث');
+            }
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const stat = entry.target;
+                        const target = parseInt(stat.getAttribute('data-count'));
+                        const duration = 2000;
+                        const increment = target / (duration / 16);
+                        let current = 0;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                stat.textContent = target.toLocaleString();
+                                clearInterval(timer);
+                            } else {
+                                stat.textContent = Math.floor(current).toLocaleString();
+                            }
+                        }, 16);
+                        
+                        const card = stat.closest('.stat-card');
+                        const progressBar = card ? card.querySelector('.stat-progress-bar') : null;
+                        if (progressBar) {
+                            const progress = parseInt(progressBar.getAttribute('data-progress') || '100');
+                            setTimeout(() => {
+                                progressBar.style.width = progress + '%';
+                            }, 300);
+                        }
+                        
+                        observer.unobserve(stat);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            stats.forEach(stat => observer.observe(stat));
+        }
+
+        window.addEventListener('load', () => {
+            animateStats();
+            initMatrixRain();
+        });
+
+        function initMatrixRain() {
+            const aiCanvas = document.getElementById('aiCanvas');
+            const cyberCanvas = document.getElementById('cyberCanvas');
+            
+            if (aiCanvas) {
+                createMatrixRain(aiCanvas, '#6366f1', '#ec4899');
+            }
+            
+            if (cyberCanvas) {
+                createMatrixRain(cyberCanvas, '#ec4899', '#6366f1');
+            }
+        }
+
+        function createMatrixRain(canvas, primaryColor, secondaryColor) {
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+
+            const educationChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            const fontSize = 12;
+            const columns = Math.floor(canvas.width / fontSize);
+            const drops = [];
+            
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.random() * -200;
+            }
+
+            function draw() {
+                ctx.fillStyle = 'rgba(10, 14, 39, 0.08)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.font = fontSize + 'px monospace';
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = educationChars[Math.floor(Math.random() * educationChars.length)];
+                    const x = i * fontSize;
+                    const y = drops[i] * fontSize;
+                    
+                    const opacity = Math.min(1, (canvas.height - y) / canvas.height);
+                    const gradient = ctx.createLinearGradient(x, y, x, y + fontSize * 3);
+                    gradient.addColorStop(0, primaryColor);
+                    gradient.addColorStop(0.5, secondaryColor);
+                    gradient.addColorStop(1, 'rgba(255,255,255,0.05)');
+                    
+                    ctx.fillStyle = gradient;
+                    ctx.globalAlpha = opacity * 0.6;
+                    ctx.fillText(text, x, y);
+
+                    if (y > canvas.height && Math.random() > 0.98) {
+                        drops[i] = 0;
+                    }
+                    drops[i] += 0.5;
+                }
+                
+                ctx.globalAlpha = 1;
+            }
+
+            setInterval(draw, 60);
+        }
+    </script>
+</body>
+</html>
