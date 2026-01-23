@@ -14,12 +14,16 @@ build/
 # PHP
 vendor/
 composer.lock
+composer.phar
+
+# Logs
 *.log
 php_errors.log
 
 # Environment variables
 .env
 .env.local
+.env.*.local
 
 # IDE
 .vscode/
@@ -34,19 +38,19 @@ Thumbs.db
 desktop.ini
 
 # Temporary files
-tmp/mpdf/ttfontdata/*.dat
-tmp/mpdf/ttfontdata/*.json
+tmp/mpdf/ttfontdata/
 tmp/*.tmp
+tmp/*.cache
 
 # Uploads (keep structure but ignore content)
 uploads/*/
 !uploads/.gitkeep
 
-# Database backups (optional - uncomment if you don't want to include)
-# *.sql
-
 # Credentials
 credentials.txt
+*.key
+*.pem
 
-# Logs
-*.log
+# Database backups (optional - uncomment if you don't want to track backups)
+# *.sql
+# *.sql.gz
