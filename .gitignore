@@ -1,62 +1,52 @@
-# Environment variables
-.env
-.env.local
-.env.*.local
-
-# PHP
-vendor/
-composer.lock
-php_errors.log
-*.log
-
 # Python
-venv/
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
+*.py[cod]
+*$py.class
 *.so
-*.egg
+.Python
+venv/
+env/
+ENV/
 *.egg-info/
 dist/
 build/
 
-# IDE and Editor files
+# PHP
+vendor/
+composer.lock
+*.log
+php_errors.log
+
+# Environment variables
+.env
+.env.local
+
+# IDE
 .vscode/
 .idea/
-.cursor/
 *.swp
 *.swo
 *~
+
+# OS
 .DS_Store
 Thumbs.db
+desktop.ini
 
 # Temporary files
-tmp/
-uploads/
-*.tmp
-*.temp
+tmp/mpdf/ttfontdata/*.dat
+tmp/mpdf/ttfontdata/*.json
+tmp/*.tmp
 
-# Database backups
-*.sql
-*.sqlite
-*.db
+# Uploads (keep structure but ignore content)
+uploads/*/
+!uploads/.gitkeep
 
-# OS files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Desktop.ini
+# Database backups (optional - uncomment if you don't want to include)
+# *.sql
 
 # Credentials
 credentials.txt
-*.key
-*.pem
 
-# Cache
-cache/
-*.cache
+# Logs
+*.log
