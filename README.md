@@ -65,7 +65,9 @@ Edit `db_connection.php` if needed (default settings usually work):
 - Username: `root`
 - Password: (empty or your MySQL password)
 
-### Step 5: Install PHP Dependencies
+### Step 5: Install PHP Dependencies ⚠️ REQUIRED
+
+**IMPORTANT:** This step is mandatory for the syllabus download feature to work!
 
 Open terminal/command prompt in the project directory:
 
@@ -78,6 +80,12 @@ If Composer is not installed:
 1. Download from: https://getcomposer.org/download/
 2. Install Composer globally
 3. Run `composer install` again
+
+**What this installs:**
+- mPDF library (for PDF syllabus generation)
+- PHPSpreadsheet library (for Excel file handling)
+
+**Note:** The `vendor/` directory is not included in the repository. You MUST run `composer install` after downloading/cloning the project.
 
 ### Step 6: Install Python Dependencies
 
@@ -130,7 +138,17 @@ python chatbot_api.py
 
 The chatbot will run on: http://localhost:5000
 
-### Step 9: Access the Application
+### Step 9: Verify Dependencies (Optional but Recommended)
+
+After installation, verify all dependencies are installed correctly:
+
+1. Open your browser
+2. Navigate to: http://localhost/Academy-platform/check_dependencies.php
+3. This will check if all required PHP libraries are installed
+
+**Note:** If the syllabus download feature doesn't work, run `composer install` and check this page again.
+
+### Step 10: Access the Application
 
 1. Open your web browser
 2. Navigate to: http://localhost/Academy-platform/

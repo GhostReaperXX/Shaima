@@ -1,4 +1,40 @@
 <?php
+// Check if Composer dependencies are installed
+if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
+    die('
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Missing Dependencies</title>
+        <style>
+            body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+            .error-box { background: #fff3cd; border: 2px solid #ffc107; padding: 20px; border-radius: 8px; }
+            h1 { color: #856404; }
+            code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; }
+            .steps { margin-top: 20px; }
+            .steps ol { line-height: 2; }
+        </style>
+    </head>
+    <body>
+        <div class="error-box">
+            <h1>⚠️ Missing PHP Dependencies</h1>
+            <p>The syllabus download feature requires PHP dependencies to be installed via Composer.</p>
+            <div class="steps">
+                <h2>To fix this, please run:</h2>
+                <ol>
+                    <li>Open terminal/command prompt in the project directory</li>
+                    <li>Run: <code>composer install</code></li>
+                    <li>If Composer is not installed, download it from: <a href="https://getcomposer.org/download/" target="_blank">https://getcomposer.org/download/</a></li>
+                    <li>After installation, refresh this page</li>
+                </ol>
+                <p><strong>Note:</strong> This is a one-time setup. Once dependencies are installed, the syllabus download will work.</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    ');
+}
+
 require_once 'vendor/autoload.php';
 require_once 'db_connection.php';
 
@@ -775,6 +811,12 @@ $syllabusContent = generateSyllabusContent($course);
 
 // Create PDF
 try {
+    // Ensure tmp directory exists for mPDF
+    $tmpDir = __DIR__ . '/tmp';
+    if (!is_dir($tmpDir)) {
+        @mkdir($tmpDir, 0777, true);
+    }
+    
     $mpdf = new Mpdf([
         'mode' => 'utf-8',
         'format' => 'A4',
@@ -783,7 +825,8 @@ try {
         'margin_top' => 25,
         'margin_bottom' => 25,
         'margin_header' => 10,
-        'margin_footer' => 10
+        'margin_footer' => 10,
+        'tempDir' => $tmpDir
     ]);
     
     // Generate HTML content
@@ -1038,6 +1081,34 @@ try {
     $mpdf->Output($filename, 'D'); // 'D' for download
     
 } catch (Exception $e) {
-    die('Error generating PDF: ' . $e->getMessage());
+    // Better error handling
+    $errorMessage = htmlspecialchars($e->getMessage());
+    die('
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>PDF Generation Error</title>
+        <style>
+            body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+            .error-box { background: #f8d7da; border: 2px solid #dc3545; padding: 20px; border-radius: 8px; }
+            h1 { color: #721c24; }
+            code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; }
+        </style>
+    </head>
+    <body>
+        <div class="error-box">
+            <h1>❌ Error Generating PDF</h1>
+            <p><strong>Error:</strong> ' . $errorMessage . '</p>
+            <p>If this error persists, please:</p>
+            <ol>
+                <li>Verify that <code>composer install</code> has been run</li>
+                <li>Check that the <code>tmp/</code> directory is writable</li>
+                <li>Verify PHP extensions: gd, mbstring are installed</li>
+                <li>Check <a href="check_dependencies.php">check_dependencies.php</a> for more details</li>
+            </ol>
+        </div>
+    </body>
+    </html>
+    ');
 }
 ?>
