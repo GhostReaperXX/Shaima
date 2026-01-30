@@ -4,8 +4,8 @@
 .env.*.local
 
 # PHP
-vendor/
-composer.lock
+# vendor/ - Commented out to allow pushing vendor directory
+# composer.lock - Commented out to allow pushing composer.lock
 php_errors.log
 *.log
 
@@ -15,7 +15,7 @@ __pycache__/
 *$py.class
 *.so
 .Python
-venv/
+# venv/ - Commented out to allow pushing venv directory
 env/
 ENV/
 .venv
@@ -36,18 +36,18 @@ Thumbs.db
 desktop.ini
 
 # Temporary files
-tmp/
-uploads/
+# tmp/ - Commented out to allow pushing tmp directory
+# uploads/ - Commented out to allow pushing uploads directory
 *.tmp
 *.temp
 
 # Database backups
-*.sql
+# *.sql - Commented out to allow pushing SQL files
 *.sqlite
 *.db
 
 # Credentials
-credentials.txt
+# credentials.txt - Commented out to allow pushing credentials.txt
 *.key
 *.pem
 
