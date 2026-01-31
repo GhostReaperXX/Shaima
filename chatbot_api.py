@@ -922,15 +922,40 @@ RESPONSE GUIDELINES:
                                 last_bot_msg = msg.get("bot", "").lower()
                                 break
                         
-                        # If "yes" was said but response doesn't continue the topic, enhance it
-                        if "roadmap" in last_bot_msg or "خارطة" in last_bot_msg:
-                            if "roadmap" not in bot_response.lower() and "خارطة" not in bot_response.lower():
-                                # Add roadmap if available
-                                if roadmap:
+                        # Check if bot asked about roadmap (with keywords like "do you want", "would you like", etc.)
+                        roadmap_keywords = ["roadmap", "خارطة", "مسار", "path", "plan", "طريق", "خطة"]
+                        roadmap_question_keywords = ["do you want", "would you like", "هل تريد", "هل ترغب", "هل تحب"]
+                        is_roadmap_question = any(keyword in last_bot_msg for keyword in roadmap_keywords) and \
+                                            any(q_keyword in last_bot_msg for q_keyword in roadmap_question_keywords)
+                        
+                        # If "yes" was said to a roadmap question, ALWAYS provide the roadmap
+                        if is_roadmap_question or ("roadmap" in last_bot_msg or "خارطة" in last_bot_msg or "مسار" in last_bot_msg):
+                            if roadmap:
+                                # Check if roadmap is already in response
+                                roadmap_in_response = any(keyword in bot_response.lower() for keyword in ["roadmap", "خارطة", "مسار", "phase", "مرحلة"])
+                                if not roadmap_in_response:
+                                    # Add roadmap - it's what the user asked for
                                     if user_lang == "ar":
-                                        bot_response = f"{bot_response}\n\n{roadmap}"
+                                        bot_response = f"{bot_response}\n\n**خارطة الطريق الكاملة:**\n\n{roadmap}"
                                     else:
-                                        bot_response = f"{bot_response}\n\n{roadmap}"
+                                        bot_response = f"{bot_response}\n\n**Complete Roadmap:**\n\n{roadmap}"
+                                else:
+                                    # Roadmap is already there, but make sure it's complete
+                                    # If the response seems incomplete, replace with full roadmap
+                                    if len(bot_response) < len(roadmap) * 0.8:  # Response is much shorter than roadmap
+                                        if user_lang == "ar":
+                                            bot_response = f"**خارطة الطريق الكاملة:**\n\n{roadmap}"
+                                        else:
+                                            bot_response = f"**Complete Roadmap:**\n\n{roadmap}"
+                            else:
+                                # No roadmap available, but user asked for it - generate one or inform
+                                if detected_category:
+                                    roadmap = get_roadmap(detected_category, user_lang)
+                                    if roadmap:
+                                        if user_lang == "ar":
+                                            bot_response = f"**خارطة الطريق الكاملة:**\n\n{roadmap}"
+                                        else:
+                                            bot_response = f"**Complete Roadmap:**\n\n{roadmap}"
                         elif "course" in last_bot_msg or "دورة" in last_bot_msg:
                             # Already handled by recommendations
                             pass
@@ -964,11 +989,50 @@ RESPONSE GUIDELINES:
         if not isinstance(bot_response, str):
             bot_response = str(bot_response) if bot_response else "I apologize, but I encountered an issue. Could you please rephrase your question?"
         
+        # Ensure roadmap is returned if user asked for it (intent is roadmap_details or roadmap)
+        roadmap_to_return = None
+        
+        # Check if user said "yes" to a roadmap question
+        if intent == "roadmap_details":
+            # User said yes to roadmap - always return the roadmap
+            if roadmap:
+                roadmap_to_return = roadmap
+            elif detected_category:
+                # Try to get roadmap for detected category
+                roadmap_to_return = get_roadmap(detected_category, user_lang)
+                # Also update the roadmap variable for use in response
+                roadmap = roadmap_to_return
+        elif intent == "roadmap":
+            # Direct roadmap request
+            if roadmap:
+                roadmap_to_return = roadmap
+            elif detected_category:
+                roadmap_to_return = get_roadmap(detected_category, user_lang)
+                roadmap = roadmap_to_return
+        
+        # Also check conversation history for roadmap questions
+        if not roadmap_to_return and conversation_history:
+            last_bot_msg = ""
+            for msg in reversed(conversation_history[-3:]):
+                if msg.get("bot"):
+                    last_bot_msg = msg.get("bot", "").lower()
+                    break
+            
+            # If last bot message asked about roadmap and user said yes
+            roadmap_keywords = ["roadmap", "خارطة", "مسار"]
+            roadmap_question_keywords = ["do you want", "would you like", "هل تريد", "هل ترغب"]
+            if any(kw in last_bot_msg for kw in roadmap_keywords) and \
+               any(qkw in last_bot_msg for qkw in roadmap_question_keywords) and \
+               any(word in message.lower() for word in ["yes", "yeah", "yep", "sure", "ok", "okay", "نعم", "أجل", "حسنا", "تمام"]):
+                if detected_category:
+                    roadmap_to_return = get_roadmap(detected_category, user_lang)
+                    roadmap = roadmap_to_return
+        
         return jsonify({
             "response": bot_response,
             "recommendations": recommendations[:3] if recommendations else [],
             "category": detected_category,
-            "roadmap": roadmap if intent == "roadmap" and roadmap else None
+            "roadmap": roadmap_to_return
         })
     
     except Exception as e:
