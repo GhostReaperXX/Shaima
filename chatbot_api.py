@@ -5,8 +5,23 @@ import os
 from dotenv import load_dotenv
 import json
 import re
+import time
 
 load_dotenv()
+
+# Debug log path
+DEBUG_LOG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.cursor', 'debug.log')
+
+def write_debug_log(data):
+    """Helper function to write debug logs safely"""
+    try:
+        os.makedirs(os.path.dirname(DEBUG_LOG_PATH), exist_ok=True)
+        with open(DEBUG_LOG_PATH, 'a', encoding='utf-8') as f:
+            f.write(json.dumps(data, ensure_ascii=False) + '\n')
+    except Exception as e:
+        # Print error to console for debugging
+        print(f"Debug log error: {e}")
+        pass
 
 app = Flask(__name__)
 CORS(app)
@@ -412,7 +427,12 @@ class ConversationContext:
         self.last_topic = None
     
     def update_from_history(self, history):
-        for msg in reversed(history[-10:]):
+        # #region agent log
+        write_debug_log({"id":"log_history_update","timestamp":time.time()*1000,"location":"chatbot_api.py:414","message":"Updating context from history","data":{"history_length":len(history),"processing_last":min(20,len(history))},"sessionId":"debug-session","runId":"run1","hypothesisId":"A"})
+        # #endregion agent log
+        
+        # Look at more history (last 20 messages) to better preserve context
+        for msg in reversed(history[-20:]):
             user_msg = msg.get("user", "").lower()
             bot_msg = msg.get("bot", "").lower()
             
@@ -420,14 +440,28 @@ class ConversationContext:
                 name_patterns = [
                     r"my name is (\w+)",
                     r"i'm (\w+)",
+                    r"i am (\w+)",
+                    r"call me (\w+)",
                     r"اسمي (\w+)",
-                    r"أنا (\w+)"
+                    r"أنا (\w+)",
+                    r"أنا اسمي (\w+)",
+                    r"^(\w{2,15})$"  # Single word (2-15 chars) might be a name if it's a standalone message
                 ]
                 for pattern in name_patterns:
                     match = re.search(pattern, user_msg)
                     if match:
-                        self.user_name = match.group(1)
-                        break
+                        potential_name = match.group(1)
+                        # Filter out common words that aren't names
+                        common_words = {"hi", "hello", "hey", "yes", "no", "ok", "okay", "thanks", "thank", "help", 
+                                       "مرحبا", "نعم", "لا", "شكرا", "مساعدة", "مساعدة"}
+                        if potential_name not in common_words:
+                            self.user_name = potential_name
+                            # #region agent log
+                            write_debug_log({"id":"log_name_extracted","timestamp":time.time()*1000,"location":"chatbot_api.py:430","message":"Name extracted from history","data":{"name":self.user_name,"pattern":pattern,"user_msg":user_msg[:30]},"sessionId":"debug-session","runId":"run1","hypothesisId":"A"})
+                            # #endregion agent log
+                            break
+                if self.user_name:
+                    break
             
             if not self.selected_field:
                 detected = detect_category(msg.get("user", ""))
@@ -439,14 +473,23 @@ class ConversationContext:
                 if detected_major:
                     self.major = detected_major
             
-            if "roadmap" in bot_msg or "خارطة" in bot_msg:
+            # Update intent from bot messages to track conversation flow
+            if "roadmap" in bot_msg or "خارطة" in bot_msg or "مسار" in bot_msg:
                 self.current_intent = "roadmap"
             elif "course" in bot_msg or "دورة" in bot_msg:
                 self.current_intent = "courses"
-            elif "salary" in bot_msg or "راتب" in bot_msg or "job market" in bot_msg:
+            elif any(word in bot_msg for word in ["salary", "راتب", "job market", "سوق العمل", "career", "مهنة", "advice", "نصيحة"]):
                 self.current_intent = "career_info"
             elif "transition" in bot_msg or "تحول" in bot_msg:
                 self.current_intent = "transition"
+            
+            # Also check user messages for intent
+            if any(word in user_msg for word in ["career", "مهنة", "job", "وظيفة", "salary", "راتب", "advice", "نصيحة", "guidance", "إرشاد"]):
+                self.current_intent = "career_info"
+            elif any(word in user_msg for word in ["roadmap", "خارطة", "مسار", "path", "طريق"]):
+                self.current_intent = "roadmap"
+            elif any(word in user_msg for word in ["course", "دورة"]):
+                self.current_intent = "courses"
 
 def detect_category(message):
     message_lower = message.lower()
@@ -498,6 +541,10 @@ def get_roadmap(category, lang="en"):
 def extract_intent(message, context, history):
     message_lower = message.lower().strip()
     
+    # #region agent log
+    write_debug_log({"id":"log_intent_check","timestamp":time.time()*1000,"location":"chatbot_api.py:498","message":"Extracting intent","data":{"message_preview":message_lower[:50],"current_intent":context.current_intent},"sessionId":"debug-session","runId":"run1","hypothesisId":"B"})
+    # #endregion agent log
+    
     affirmative = ["yes", "yeah", "yep", "sure", "ok", "okay", "alright", "نعم", "أجل", "حسنا", "تمام", "موافق"]
     if any(word in message_lower for word in affirmative) and len(message_lower) < 15:
         if context.current_intent == "roadmap":
@@ -516,24 +563,44 @@ def extract_intent(message, context, history):
     if any(word in message_lower for word in ["course", "دورة", "recommend", "أنصح"]):
         return "courses"
     
-    if any(word in message_lower for word in ["salary", "راتب", "job market", "سوق العمل", "income", "دخل"]):
+    # Expanded career-related keywords
+    career_keywords = [
+        "salary", "راتب", "job market", "سوق العمل", "income", "دخل", 
+        "career", "مهنة", "job", "وظيفة", "employment", "توظيف",
+        "advice", "نصيحة", "guidance", "إرشاد", "help", "مساعدة",
+        "future", "مستقبل", "opportunities", "فرص", "prospects", "آفاق",
+        "what can i do", "ماذا يمكنني", "how to start", "كيف أبدأ",
+        "career path", "مسار مهني", "job opportunities", "فرص عمل"
+    ]
+    if any(keyword in message_lower for keyword in career_keywords):
         return "career_info"
     
     if any(word in message_lower for word in ["transition", "تحول", "switch", "تغيير", "change career"]):
         return "transition"
     
     if any(word in message_lower for word in ["how", "كيف", "what", "ماذا", "explain", "اشرح"]):
+        # Check if it's a career-related question
+        if any(word in message_lower for word in ["career", "job", "salary", "مهنة", "وظيفة", "راتب"]):
+            return "career_info"
         return "explanation"
     
     category = detect_category(message)
     if category:
         return "field_inquiry"
     
+    # #region agent log
+    write_debug_log({"id":"log_intent_result","timestamp":time.time()*1000,"location":"chatbot_api.py:532","message":"Intent extraction result","data":{"intent":"general","message":message_lower[:50]},"sessionId":"debug-session","runId":"run1","hypothesisId":"B"})
+    # #endregion agent log
+    
     return "general"
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
     try:
+        # #region agent log
+        write_debug_log({"id":"log_entry","timestamp":time.time()*1000,"location":"chatbot_api.py:536","message":"Chat endpoint called","data":{"message_length":len(request.json.get('message','')),"history_length":len(request.json.get('history',[]))},"sessionId":"debug-session","runId":"run1","hypothesisId":"A"})
+        # #endregion agent log
+        
         data = request.json
         message = data.get('message', '')
         conversation_history = data.get('history', [])
@@ -544,6 +611,32 @@ def chat():
         
         context = ConversationContext()
         context.update_from_history(conversation_history)
+        
+        # Also check current message for name if not found in history
+        if not context.user_name:
+            name_patterns = [
+                r"my name is (\w+)",
+                r"i'm (\w+)",
+                r"i am (\w+)",
+                r"call me (\w+)",
+                r"اسمي (\w+)",
+                r"أنا (\w+)",
+                r"أنا اسمي (\w+)",
+            ]
+            message_lower = message.lower()
+            for pattern in name_patterns:
+                match = re.search(pattern, message_lower)
+                if match:
+                    potential_name = match.group(1)
+                    common_words = {"hi", "hello", "hey", "yes", "no", "ok", "okay", "thanks", "thank", "help"}
+                    if potential_name not in common_words and len(potential_name) >= 2:
+                        context.user_name = potential_name
+                        write_debug_log({"id":"log_name_current","timestamp":time.time()*1000,"location":"chatbot_api.py:630","message":"Name extracted from current message","data":{"name":context.user_name},"sessionId":"debug-session","runId":"run1","hypothesisId":"A"})
+                        break
+        
+        # #region agent log
+        write_debug_log({"id":"log_context","timestamp":time.time()*1000,"location":"chatbot_api.py:647","message":"Context after update_from_history","data":{"user_name":context.user_name,"selected_field":context.selected_field,"major":context.major,"current_intent":context.current_intent},"sessionId":"debug-session","runId":"run1","hypothesisId":"A"})
+        # #endregion agent log
         
         detected_category = detect_category(message)
         detected_major = detect_major_from_message(message)
@@ -576,6 +669,10 @@ def chat():
         roadmap = get_roadmap(detected_category, user_lang)
         
         intent = extract_intent(message, context, conversation_history)
+        
+        # #region agent log
+        write_debug_log({"id":"log_intent","timestamp":time.time()*1000,"location":"chatbot_api.py:578","message":"Intent extracted","data":{"intent":intent,"detected_category":detected_category,"message_preview":message[:50]},"sessionId":"debug-session","runId":"run1","hypothesisId":"B"})
+        # #endregion agent log
         
         enrollment_keywords = ["enrollment", "registration", "how to enroll", "how to register", "sign up", "تسجيل", "كيف أسجل", "كيف أتسجل", "التسجيل", "إجراءات التسجيل"]
         if any(keyword in message.lower() for keyword in enrollment_keywords):
@@ -633,18 +730,65 @@ After payment is received, your account will be created and course content acces
                 "roadmap": None
             })
         
+        roadmap = get_roadmap(detected_category, user_lang)
+        
+        intent = extract_intent(message, context, conversation_history)
+        
+        # #region agent log
+        write_debug_log({"id":"log_intent","timestamp":time.time()*1000,"location":"chatbot_api.py:671","message":"Intent extracted","data":{"intent":intent,"detected_category":detected_category,"message_preview":message[:50]},"sessionId":"debug-session","runId":"run1","hypothesisId":"B"})
+        # #endregion agent log
+        
+        # Build personalized greeting if name is available
+        name_greeting = ""
+        if context.user_name and context.user_name != "Not provided":
+            if user_lang == "ar":
+                name_greeting = f"مرحباً {context.user_name}، "
+            else:
+                name_greeting = f"{context.user_name}, "
+        
+        # Determine if this is primarily a career question
+        is_career_question = intent == "career_info" or any(word in message.lower() for word in ["career", "job", "salary", "مهنة", "وظيفة", "راتب", "advice", "نصيحة"])
+        
+        # Build the most explicit system prompt possible
+        name_instruction = ""
+        if context.user_name and context.user_name != "Not provided":
+            if user_lang == "ar":
+                name_instruction = f"يجب أن تبدأ ردك بـ '{context.user_name}،' في كل مرة. استخدم الاسم '{context.user_name}' بشكل طبيعي في ردك."
+            else:
+                name_instruction = f"You MUST start your response with '{context.user_name},' every single time. Use the name '{context.user_name}' naturally throughout your response."
+        else:
+            name_instruction = "If the user provides their name, immediately acknowledge it and use it in all future responses."
+        
+        career_instruction = ""
+        if is_career_question:
+            if user_lang == "ar":
+                career_instruction = "هذا سؤال مهني - قدم إرشادات مهنية مفصلة أولاً (سوق العمل، الرواتب، المسارات المهنية، المهارات المطلوبة)، ثم اذكر الدورات إذا كانت ذات صلة. لا تعتمد على خرائط الطريق فقط."
+            else:
+                career_instruction = "THIS IS A CAREER QUESTION - Provide detailed career guidance FIRST (job market, salaries, career paths, skills needed), THEN mention courses if relevant. DO NOT default to roadmaps."
+        else:
+            career_instruction = "Answer the user's question directly and helpfully."
+        
         system_prompt = f"""You are a senior academic advisor and career consultant embedded in an education platform. Your role is to GUIDE, not sell, not reset, not loop.
+
+CRITICAL REQUIREMENTS (MUST FOLLOW):
+1. USER'S NAME: {context.user_name if context.user_name else "NOT PROVIDED YET"}
+   {name_instruction}
+   
+2. CAREER ADVICE PRIORITY: {career_instruction}
 
 ABSOLUTE RULES:
 1. RESPOND TO USER'S LAST MESSAGE ONLY - Never respond with marketing text, never reintroduce yourself, never list capabilities unless explicitly asked.
-2. ACKNOWLEDGE USER INPUT - If user gives a name, confirm and use it. If user says "yes/okay", continue logically. If user selects a field, stay in that field forever unless changed.
-3. CONTEXT IS PERMANENT - Store and reuse: name, selected field, current intent. Never ask again for something already provided.
-4. NEVER RESET - Forbidden phrases: "Tell me which field interests you", "I can help you with...", "Ask me anything", any capability list.
-5. NO DUPLICATION - If roadmap was shown, do NOT show it again. If courses were listed, do NOT relist unless asked. If user said YES, MOVE FORWARD, not sideways.
-6. INTENT-DRIVEN LOGIC - Interpret intent from last message. "yes" → proceed to next logical step. Single keyword (e.g. "cybersecurity") → deep dive, not overview.
-7. ANSWER FIRST, ASK LATER - Provide value BEFORE asking follow-up. Only ask ONE short clarifying question if absolutely necessary.
-8. OUTPUT FORMAT - Short paragraphs, clear sections, no emojis unless user uses them, no hype language, no sales tone.
-9. SELF-CHECK - Ask: "Does this directly answer the user's last message?" If NO → rewrite.
+2. MANDATORY NAME USAGE - {"YOU MUST START YOUR RESPONSE WITH: '" + name_greeting + "' if name is available. Use the name naturally throughout your response." if context.user_name else "If the user provides their name, immediately acknowledge it and use it in all future responses."}
+3. ACKNOWLEDGE USER INPUT - If user gives a name, confirm and use it. If user says "yes/okay", continue logically. If user selects a field, stay in that field forever unless changed.
+4. CONTEXT IS PERMANENT - Store and reuse: name, selected field, current intent. Never ask again for something already provided.
+5. NEVER RESET - Forbidden phrases: "Tell me which field interests you", "I can help you with...", "Ask me anything", any capability list.
+6. NO DUPLICATION - If roadmap was shown, do NOT show it again. If courses were listed, do NOT relist unless asked. If user said YES, MOVE FORWARD, not sideways.
+7. INTENT-DRIVEN LOGIC - Interpret intent from last message. "yes" → proceed to next logical step. Single keyword (e.g. "cybersecurity") → deep dive, not overview.
+8. ANSWER FIRST, ASK LATER - Provide value BEFORE asking follow-up. Only ask ONE short clarifying question if absolutely necessary.
+9. OUTPUT FORMAT - Short paragraphs, clear sections, no emojis unless user uses them, no hype language, no sales tone.
+10. SELF-CHECK - Ask: "Does this directly answer the user's last message?" If NO → rewrite.
+11. CAREER ADVICE IS PRIMARY - When users ask about careers, job market, salaries, career paths, or advice about their major, provide detailed, professional career guidance FIRST. Don't default to course roadmaps. Give real career insights: job market trends, salary ranges, career progression paths, required skills, industry outlook, and practical advice for entering/advancing in the field. THEN mention courses if relevant.
+12. REMEMBER CONTEXT - Reference previous conversation topics naturally. If user mentioned their major earlier, remember it. If they asked about careers, continue that thread.
 
 CONTEXT FROM CONVERSATION:
 - User name: {context.user_name or "Not provided"}
@@ -663,13 +807,18 @@ CURRENT INTENT DETECTED: {intent}
 
 RESPONSE GUIDELINES:
 - Language: Always respond in {user_lang}
+- {"MANDATORY: Start your response with the user's name: '" + context.user_name + "'" if context.user_name and context.user_name != "Not provided" else "If user provides their name, use it immediately"}
 - If user said "yes/okay" and we were discussing {context.current_intent}, provide MORE DETAILED information about that topic
 - If user mentioned a field ({detected_category}), provide deep dive, not overview
-- If user mentioned their major ({context.major}), recommend relevant courses and explain why they're beneficial
+- If user mentioned their major ({context.major}), provide comprehensive guidance: career paths, job market, salary expectations, required skills, AND recommend relevant courses
+- When users ask about careers, salaries, job market, or career advice: provide detailed professional guidance with real insights FIRST, then mention courses if relevant. Don't default to roadmaps.
+- For career questions, include: job market outlook, typical salary ranges, career progression paths, required skills/qualifications, industry trends, and practical next steps
 - Never repeat information already provided in conversation history
 - Never ask "what field interests you" if field is already known
 - Be decisive. If user is vague, assume they want the most practical next step
-- Act like a senior academic advisor, not a chatbot demo or landing page"""
+- Act like a senior academic advisor and career counselor, providing both academic and career guidance
+- Remember the full conversation context - reference previous topics naturally when relevant
+- If intent is "career_info", prioritize career guidance over course recommendations"""
 
         user_messages = [{"role": "system", "content": system_prompt}]
         
@@ -679,7 +828,15 @@ RESPONSE GUIDELINES:
             if hist.get("bot"):
                 user_messages.append({"role": "assistant", "content": hist.get("bot")})
         
-        user_messages.append({"role": "user", "content": message})
+        # Add explicit instruction to the user message if this is a career question
+        enhanced_message = message
+        if intent == "career_info" or any(word in message.lower() for word in ["career", "job", "salary", "مهنة", "وظيفة", "راتب", "advice", "نصيحة", "guidance", "إرشاد"]):
+            if user_lang == "ar":
+                enhanced_message = f"{message}\n\n[ملاحظة: يرجى تقديم نصائح مهنية مفصلة حول سوق العمل والرواتب والمسار المهني، وليس فقط خارطة طريق للدورات]"
+            else:
+                enhanced_message = f"{message}\n\n[Note: Please provide detailed career guidance about job market, salaries, and career paths, not just course roadmaps]"
+        
+        user_messages.append({"role": "user", "content": enhanced_message})
         
         if openai.api_key:
             try:
@@ -694,6 +851,30 @@ RESPONSE GUIDELINES:
                 )
                 bot_response = response.choices[0].message.content.strip()
                 
+                # Debug: Print context info
+                print(f"[DEBUG] User name in context: {context.user_name}")
+                print(f"[DEBUG] Intent: {intent}")
+                print(f"[DEBUG] Response preview: {bot_response[:100] if bot_response else 'Empty'}")
+                
+                # #region agent log
+                write_debug_log({"id":"log_response","timestamp":time.time()*1000,"location":"chatbot_api.py:833","message":"OpenAI response received","data":{"response_length":len(bot_response) if bot_response else 0,"has_name":context.user_name in bot_response if context.user_name and bot_response else False,"user_name":context.user_name,"intent":intent},"sessionId":"debug-session","runId":"run1","hypothesisId":"C"})
+                # #endregion agent log
+                
+                # Post-process: Ensure name is used if available
+                if context.user_name and context.user_name != "Not provided":
+                    # Check if name is already in response (case-insensitive)
+                    name_in_response = context.user_name.lower() in bot_response.lower()
+                    print(f"[DEBUG] Name '{context.user_name}' in response: {name_in_response}")
+                    
+                    if not name_in_response:
+                        # Add name greeting at the beginning
+                        if user_lang == "ar":
+                            bot_response = f"{context.user_name}، {bot_response}"
+                        else:
+                            bot_response = f"{context.user_name}, {bot_response}"
+                        print(f"[DEBUG] Added name to response: {bot_response[:100]}")
+                        write_debug_log({"id":"log_name_added","timestamp":time.time()*1000,"location":"chatbot_api.py:848","message":"Name added to response","data":{"name":context.user_name},"sessionId":"debug-session","runId":"run1","hypothesisId":"C"})
+                
                 if not bot_response:
                     bot_response = generate_contextual_fallback(message, detected_category, recommendations, roadmap, user_lang, context)
                 
@@ -702,6 +883,14 @@ RESPONSE GUIDELINES:
                 bot_response = generate_contextual_fallback(message, detected_category, recommendations, roadmap, user_lang, context)
         else:
             bot_response = generate_contextual_fallback(message, detected_category, recommendations, roadmap, user_lang, context)
+        
+        # Post-process fallback responses too: Ensure name is used if available
+        if context.user_name and context.user_name != "Not provided":
+            if context.user_name.lower() not in bot_response.lower():
+                if user_lang == "ar":
+                    bot_response = f"{context.user_name}، {bot_response}"
+                else:
+                    bot_response = f"{context.user_name}, {bot_response}"
         
         if not isinstance(bot_response, str):
             bot_response = str(bot_response) if bot_response else "I apologize, but I encountered an issue. Could you please rephrase your question?"
@@ -724,10 +913,35 @@ RESPONSE GUIDELINES:
 def generate_contextual_fallback(message, category, recommendations, roadmap, lang, context):
     message_lower = message.lower().strip()
     
+    # #region agent log
+    write_debug_log({"id":"log_fallback","timestamp":time.time()*1000,"location":"chatbot_api.py:724","message":"Using fallback response","data":{"has_category":bool(category),"has_recommendations":bool(recommendations),"has_name":bool(context.user_name)},"sessionId":"debug-session","runId":"run1","hypothesisId":"E"})
+    # #endregion agent log
+    
     if context.user_name:
         greeting = f"Hello {context.user_name}" if lang == "en" else f"مرحباً {context.user_name}"
     else:
         greeting = "Hello" if lang == "en" else "مرحباً"
+    
+    # Check if this is a career-related question
+    career_keywords = ["career", "job", "salary", "مهنة", "وظيفة", "راتب", "advice", "نصيحة"]
+    is_career_question = any(keyword in message_lower for keyword in career_keywords)
+    
+    if is_career_question and category:
+        # Provide career advice instead of just courses
+        if lang == "ar":
+            return f"{greeting}. بناءً على اهتمامك بمجال {category}، إليك بعض النصائح المهنية:\n\n" + \
+                   f"• سوق العمل في {category} يتطلب مهارات تقنية قوية\n" + \
+                   f"• الراتب المتوقع يتراوح بين $30,000 - $80,000 سنوياً حسب الخبرة\n" + \
+                   f"• المسار المهني: مبتدئ → متوسط → خبير → قائد فريق\n" + \
+                   f"• المهارات المطلوبة: معرفة تقنية عميقة، حل المشكلات، العمل الجماعي\n\n" + \
+                   f"هل تريد معرفة المزيد عن الدورات التدريبية المتاحة في هذا المجال؟"
+        else:
+            return f"{greeting}. Based on your interest in {category}, here's some career guidance:\n\n" + \
+                   f"• The job market in {category} requires strong technical skills\n" + \
+                   f"• Expected salary ranges from $30,000 - $80,000 annually depending on experience\n" + \
+                   f"• Career path: Entry-level → Mid-level → Senior → Team Lead\n" + \
+                   f"• Required skills: Deep technical knowledge, problem-solving, teamwork\n\n" + \
+                   f"Would you like to know more about available training courses in this field?"
     
     if category and recommendations:
         if lang == "ar":
