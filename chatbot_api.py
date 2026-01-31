@@ -30,28 +30,34 @@ openai.api_key = os.getenv('OPENAI_API_KEY', '')
 
 courses_data = {
     "cybersecurity": [
-        {"title": "Advanced Cybersecurity", "price": 450, "instructor": "Dr. Mohammed Al-Ahmad", "rating": 4.8, "hours": 120},
-        {"title": "Cybersecurity Fundamentals for Beginners", "price": 250, "instructor": "Ms. Sarah Al-Khalid", "rating": 4.6, "hours": 60}
+        {"title": "Advanced Cybersecurity", "titleAr": "الأمن السيبراني المتقدم", "price": 450, "instructor": "Dr. Mohammed Al-Ahmad", "rating": 4.8, "hours": 120, "level": "Advanced"},
+        {"title": "Cybersecurity Fundamentals for Beginners", "titleAr": "أساسيات الأمن السيبراني للمبتدئين", "price": 250, "instructor": "Ms. Sarah Al-Khalid", "rating": 4.6, "hours": 60, "level": "Beginner"}
     ],
     "programming": [
-        {"title": "Professional Software Engineering", "price": 500, "instructor": "Eng. Ahmed Ali", "rating": 4.9, "hours": 150},
-        {"title": "Full-Stack Web Development", "price": 400, "instructor": "Eng. Khaled Al-Dosari", "rating": 4.7, "hours": 100}
+        {"title": "Professional Software Engineering", "titleAr": "هندسة البرمجيات الاحترافية", "price": 500, "instructor": "Eng. Ahmed Ali", "rating": 4.9, "hours": 150, "level": "Advanced"},
+        {"title": "Full-Stack Web Development", "titleAr": "تطوير تطبيقات الويب الكاملة", "price": 400, "instructor": "Eng. Khaled Al-Dosari", "rating": 4.7, "hours": 100, "level": "Intermediate"}
+    ],
+    "computer_science": [
+        {"title": "Computer Science Fundamentals", "titleAr": "علوم الحاسوب الأساسية", "price": 300, "instructor": "Dr. Fatima Al-Noor", "rating": 4.5, "hours": 80, "level": "Beginner"},
+        {"title": "Advanced Algorithms and Data Structures", "titleAr": "الخوارزميات وهياكل البيانات المتقدمة", "price": 450, "instructor": "Dr. Youssef Al-Maliki", "rating": 4.8, "hours": 120, "level": "Advanced"}
     ],
     "ai": [
-        {"title": "Artificial Intelligence and Machine Learning", "price": 550, "instructor": "Dr. Ali Al-Hussein", "rating": 4.9, "hours": 140},
-        {"title": "Natural Language Processing", "price": 480, "instructor": "Dr. Nora Al-Saeed", "rating": 4.7, "hours": 110}
+        {"title": "Artificial Intelligence and Machine Learning", "titleAr": "الذكاء الاصطناعي والتعلم الآلي", "price": 550, "instructor": "Dr. Ali Al-Hussein", "rating": 4.9, "hours": 140, "level": "Advanced"},
+        {"title": "Natural Language Processing", "titleAr": "معالجة اللغة الطبيعية", "price": 480, "instructor": "Dr. Nora Al-Saeed", "rating": 4.7, "hours": 110, "level": "Intermediate"}
     ],
     "accounting": [
-        {"title": "Advanced Financial Accounting", "price": 350, "instructor": "Dr. Mahmoud Al-Ali", "rating": 4.6, "hours": 90},
-        {"title": "Accounting Fundamentals for Beginners", "price": 200, "instructor": "Ms. Lina Salama", "rating": 4.5, "hours": 50}
+        {"title": "Advanced Financial Accounting", "titleAr": "المحاسبة المالية المتقدمة", "price": 350, "instructor": "Dr. Mahmoud Al-Ali", "rating": 4.6, "hours": 90, "level": "Advanced"},
+        {"title": "Accounting Fundamentals for Beginners", "titleAr": "أساسيات المحاسبة للمبتدئين", "price": 200, "instructor": "Ms. Lina Salama", "rating": 4.5, "hours": 50, "level": "Beginner"},
+        {"title": "Managerial Accounting and Costing", "titleAr": "المحاسبة الإدارية والتكاليف", "price": 380, "instructor": "Dr. Sami Al-Qadi", "rating": 4.7, "hours": 100, "level": "Intermediate"}
     ],
     "business": [
-        {"title": "Strategic Business Management", "price": 420, "instructor": "Dr. Reem Al-Abdullah", "rating": 4.8, "hours": 110},
-        {"title": "Entrepreneurship and Project Management", "price": 400, "instructor": "Eng. Khaled Al-Mutairi", "rating": 4.7, "hours": 95}
+        {"title": "Strategic Business Management", "titleAr": "إدارة الأعمال الاستراتيجية", "price": 420, "instructor": "Dr. Reem Al-Abdullah", "rating": 4.8, "hours": 110, "level": "Advanced"},
+        {"title": "Entrepreneurship and Project Management", "titleAr": "ريادة الأعمال وإدارة المشاريع", "price": 400, "instructor": "Eng. Khaled Al-Mutairi", "rating": 4.7, "hours": 95, "level": "Intermediate"},
+        {"title": "Digital Marketing", "titleAr": "التسويق الرقمي والإلكتروني", "price": 350, "instructor": "Ms. Nora Al-Ahmad", "rating": 4.6, "hours": 85, "level": "Intermediate"}
     ],
     "law": [
-        {"title": "Commercial Law and Companies", "price": 450, "instructor": "Dr. Fahd Al-Salem", "rating": 4.7, "hours": 120},
-        {"title": "Civil Law and Contracts", "price": 380, "instructor": "Dr. Mona Al-Hassan", "rating": 4.6, "hours": 100}
+        {"title": "Commercial Law and Companies", "titleAr": "القانون التجاري والشركات", "price": 450, "instructor": "Dr. Fahd Al-Salem", "rating": 4.7, "hours": 120, "level": "Advanced"},
+        {"title": "Civil Law and Contracts", "titleAr": "القانون المدني والعقود", "price": 380, "instructor": "Dr. Mona Al-Hassan", "rating": 4.6, "hours": 100, "level": "Intermediate"}
     ]
 }
 
@@ -159,6 +165,60 @@ Phase 4: Specialization (Year 2+)
 - تصميم الأنظمة والقابلية للتوسع
 - القيادة وإدارة الفريق
 - المسار المهني: مطور مبتدئ → مطور أول → قائد تقني → مدير هندسة"""
+    },
+    "computer_science": {
+        "en": """Computer Science Career Roadmap:
+
+Phase 1: Foundations (Months 1-3)
+- Programming fundamentals (Python/Java/C++)
+- Basic algorithms and problem-solving
+- Data structures (arrays, lists, stacks, queues)
+- Complete: Computer Science Fundamentals course
+
+Phase 2: Core Concepts (Months 4-6)
+- Advanced data structures (trees, graphs, hash tables)
+- Algorithm design and analysis
+- Operating systems basics
+- Database fundamentals
+- Complete: Advanced Algorithms and Data Structures course
+
+Phase 3: Advanced Topics (Months 7-12)
+- System design and architecture
+- Distributed systems
+- Software engineering principles
+- Specialized electives (AI, Security, Networks)
+
+Phase 4: Specialization (Year 2+)
+- Research or industry focus
+- Advanced certifications
+- Open source contributions
+- Career: Software Engineer → Senior Engineer → Architect → Research Scientist""",
+        "ar": """خارطة طريق علوم الحاسوب:
+
+المرحلة 1: الأساسيات (أشهر 1-3)
+- أساسيات البرمجة (Python/Java/C++)
+- الخوارزميات الأساسية وحل المشكلات
+- هياكل البيانات (المصفوفات، القوائم، المكدسات، الطوابير)
+- إكمال: دورة أساسيات علوم الحاسوب
+
+المرحلة 2: المفاهيم الأساسية (أشهر 4-6)
+- هياكل البيانات المتقدمة (الأشجار، الرسوم البيانية، جداول التجزئة)
+- تصميم وتحليل الخوارزميات
+- أساسيات أنظمة التشغيل
+- أساسيات قواعد البيانات
+- إكمال: دورة الخوارزميات وهياكل البيانات المتقدمة
+
+المرحلة 3: المواضيع المتقدمة (أشهر 7-12)
+- تصميم الأنظمة والهندسة المعمارية
+- الأنظمة الموزعة
+- مبادئ هندسة البرمجيات
+- مواد اختيارية متخصصة (الذكاء الاصطناعي، الأمن، الشبكات)
+
+المرحلة 4: التخصص (السنة 2+)
+- التركيز على البحث أو الصناعة
+- الشهادات المتقدمة
+- المساهمات في المشاريع مفتوحة المصدر
+- المسار المهني: مهندس برمجيات → مهندس أول → مهندس معماري → باحث علمي"""
     },
     "ai": {
         "en": """AI/ML Career Roadmap:
@@ -371,35 +431,50 @@ Phase 4: Professional (Year 2+)
 }
 
 major_to_courses = {
+    # Cybersecurity
     "أمن سيبراني": "cybersecurity",
     "cybersecurity": "cybersecurity",
     "أمن معلومات": "cybersecurity",
     "information security": "cybersecurity",
     "network security": "cybersecurity",
     "أمن الشبكات": "cybersecurity",
+    # Programming / Software Engineering
     "برمجة": "programming",
     "programming": "programming",
     "هندسة برمجيات": "programming",
     "software engineering": "programming",
     "تطوير": "programming",
     "development": "programming",
-    "علوم حاسوب": "programming",
-    "computer science": "programming",
     "تطوير ويب": "programming",
     "web development": "programming",
+    # Computer Science (separate category)
+    "علوم حاسوب": "computer_science",
+    "computer science": "computer_science",
+    "cs": "computer_science",
+    "algorithms": "computer_science",
+    "خوارزميات": "computer_science",
+    "data structures": "computer_science",
+    "هياكل بيانات": "computer_science",
+    # AI / Machine Learning
     "ذكاء اصطناعي": "ai",
     "artificial intelligence": "ai",
     "ai": "ai",
     "تعلم آلي": "ai",
     "machine learning": "ai",
+    "ml": "ai",
     "علم بيانات": "ai",
     "data science": "ai",
+    "nlp": "ai",
+    "natural language processing": "ai",
+    "معالجة اللغة الطبيعية": "ai",
+    # Accounting
     "محاسبة": "accounting",
     "accounting": "accounting",
     "محاسبة مالية": "accounting",
     "financial accounting": "accounting",
     "محاسبة إدارية": "accounting",
     "managerial accounting": "accounting",
+    # Business
     "إدارة أعمال": "business",
     "business": "business",
     "business management": "business",
@@ -409,6 +484,7 @@ major_to_courses = {
     "marketing": "business",
     "تسويق رقمي": "business",
     "digital marketing": "business",
+    # Law
     "قانون": "law",
     "law": "law",
     "قانون تجاري": "law",
@@ -498,12 +574,30 @@ class ConversationContext:
 
 def detect_category(message):
     message_lower = message.lower()
+    
+    # First check for specific course titles
+    course_titles = {
+        "cybersecurity": ["advanced cybersecurity", "cybersecurity fundamentals", "الأمن السيبراني المتقدم", "أساسيات الأمن السيبراني"],
+        "programming": ["professional software engineering", "full-stack web development", "هندسة البرمجيات الاحترافية", "تطوير تطبيقات الويب"],
+        "computer_science": ["computer science fundamentals", "advanced algorithms", "data structures", "علوم الحاسوب", "الخوارزميات", "هياكل البيانات"],
+        "ai": ["artificial intelligence", "machine learning", "natural language processing", "nlp", "الذكاء الاصطناعي", "التعلم الآلي", "معالجة اللغة الطبيعية"],
+        "accounting": ["financial accounting", "accounting fundamentals", "managerial accounting", "المحاسبة المالية", "أساسيات المحاسبة", "المحاسبة الإدارية"],
+        "business": ["business management", "entrepreneurship", "project management", "digital marketing", "إدارة الأعمال", "ريادة الأعمال", "التسويق الرقمي"],
+        "law": ["commercial law", "civil law", "contracts", "القانون التجاري", "القانون المدني", "العقود"]
+    }
+    
+    for category, titles in course_titles.items():
+        if any(title in message_lower for title in titles):
+            return category
+    
+    # Then check for general category keywords
     categories = {
         "cybersecurity": ["cybersecurity", "security", "cyber", "hacking", "protection", "penetration", "ethical hacker", "network security", "information security", "data protection", "vulnerability", "firewall", "malware", "infosec", "أمن", "سيبراني", "اختراق", "حماية", "أمن المعلومات", "جدار ناري", "أمن الشبكات"],
-        "programming": ["programming", "coding", "software", "development", "web", "developer", "backend", "frontend", "full stack", "fullstack", "app development", "application", "code", "programmer", "software engineer", "web dev", "برمجة", "تطوير", "مطور", "تطبيقات", "مواقع", "كود", "هندسة برمجيات"],
+        "programming": ["programming", "coding", "software", "development", "web", "developer", "backend", "frontend", "full stack", "fullstack", "app development", "application", "code", "programmer", "software engineer", "web dev", "برمجة", "تطوير", "مطور", "تطبيقات", "مواقع", "كود", "هندسة برمجيات", "software engineering"],
+        "computer_science": ["computer science", "algorithms", "data structures", "operating systems", "databases", "cs", "علوم حاسوب", "خوارزميات", "هياكل بيانات", "أنظمة تشغيل", "قواعد بيانات"],
         "ai": ["ai", "artificial intelligence", "machine learning", "ml", "neural", "deep learning", "nlp", "natural language", "computer vision", "data science", "neural network", "algorithm", "model", "training", "prediction", "data scientist", "ml engineer", "ذكاء", "اصطناعي", "تعلم آلي", "تعلم عميق", "بيانات", "نموذج", "علم بيانات"],
         "accounting": ["accounting", "finance", "financial", "cpa", "cma", "audit", "bookkeeping", "tax", "budget", "accountant", "financial statement", "balance sheet", "forensic accounting", "محاسبة", "مالي", "تدقيق", "محاسب", "قوائم مالية", "ضرائب", "محاسبة مالية"],
-        "business": ["business", "management", "entrepreneurship", "marketing", "mba", "strategy", "leadership", "project management", "operations", "hr", "human resources", "sales", "startup", "business analyst", "consulting", "أعمال", "تجارة", "تسويق", "إدارة", "ريادة", "مشروع", "قيادة", "تحليل أعمال"],
+        "business": ["business", "management", "entrepreneurship", "marketing", "mba", "strategy", "leadership", "project management", "operations", "hr", "human resources", "sales", "startup", "business analyst", "consulting", "digital marketing", "أعمال", "تجارة", "تسويق", "إدارة", "ريادة", "مشروع", "قيادة", "تحليل أعمال", "تسويق رقمي"],
         "law": ["law", "legal", "lawyer", "attorney", "litigation", "contract", "court", "judge", "legal system", "jurisprudence", "legislation", "paralegal", "قانون", "قضائي", "محامي", "عقد", "محكمة", "قاضي", "نظام قانوني", "قانوني"],
     }
     
@@ -536,6 +630,18 @@ def detect_language(message):
 def get_course_recommendations(category):
     if category and category in courses_data:
         return courses_data[category]
+    # Also check if it's a related category
+    category_mapping = {
+        "it": ["cybersecurity", "programming", "computer_science", "ai"],
+        "information technology": ["cybersecurity", "programming", "computer_science", "ai"],
+        "تقنية المعلومات": ["cybersecurity", "programming", "computer_science", "ai"]
+    }
+    if category in category_mapping:
+        all_courses = []
+        for cat in category_mapping[category]:
+            if cat in courses_data:
+                all_courses.extend(courses_data[cat])
+        return all_courses
     return []
 
 def get_roadmap(category, lang="en"):
@@ -1063,7 +1169,8 @@ def generate_contextual_fallback(message, category, recommendations, roadmap, la
     if category:
         category_names = {
             "cybersecurity": {"ar": "الأمن السيبراني", "en": "Cybersecurity"},
-            "programming": {"ar": "البرمجة", "en": "Programming"},
+            "programming": {"ar": "البرمجة / هندسة البرمجيات", "en": "Programming / Software Engineering"},
+            "computer_science": {"ar": "علوم الحاسوب", "en": "Computer Science"},
             "ai": {"ar": "الذكاء الاصطناعي", "en": "Artificial Intelligence"},
             "accounting": {"ar": "المحاسبة", "en": "Accounting"},
             "business": {"ar": "إدارة الأعمال", "en": "Business Management"},
@@ -1086,22 +1193,27 @@ def generate_contextual_fallback(message, category, recommendations, roadmap, la
                             f"• **Career Path:** Entry-level → Mid-level → Senior → Team Lead\n" + \
                             f"• **Required Skills:** Deep technical knowledge, problem-solving, teamwork, effective communication\n\n"
         
-        # Add course recommendations if available
+        # Add course recommendations if available - show ALL courses for the category
         courses_text = ""
         if recommendations:
             if lang == "ar":
-                courses_text = f"**الدورات التدريبية المتاحة:**\n\n" + "\n".join([f"• {r['title']} - ${r['price']} - {r['hours']} ساعة" for r in recommendations[:3]])
+                courses_text = f"**الدورات التدريبية المتاحة في {category_name}:**\n\n"
+                for r in recommendations:
+                    course_title = r.get('titleAr', r.get('title', ''))
+                    courses_text += f"• **{course_title}**\n"
+                    courses_text += f"  - السعر: ${r['price']} | الساعات: {r['hours']} ساعة | التقييم: {r['rating']}⭐\n"
+                    courses_text += f"  - المدرب: {r.get('instructor', '')}\n\n"
             else:
-                courses_text = f"**Available Training Courses:**\n\n" + "\n".join([f"• {r['title']} - ${r['price']} - {r['hours']} hours" for r in recommendations[:3]])
+                courses_text = f"**Available Training Courses in {category_name}:**\n\n"
+                for r in recommendations:
+                    course_title = r.get('title', '')
+                    courses_text += f"• **{course_title}**\n"
+                    courses_text += f"  - Price: ${r['price']} | Hours: {r['hours']} | Rating: {r['rating']}⭐\n"
+                    courses_text += f"  - Instructor: {r.get('instructor', '')}\n\n"
         
         return f"{greeting}.\n\n{career_guidance}{courses_text}"
     
-    if category and recommendations:
-        if lang == "ar":
-            return f"{greeting}. بناءً على اهتمامك بـ {category}، أنصحك بالدورات التالية:\n\n" + "\n".join([f"• {r['title']} - ${r['price']} - {r['hours']} ساعة" for r in recommendations[:3]])
-        else:
-            return f"{greeting}. Based on your interest in {category}, I recommend these courses:\n\n" + "\n".join([f"• {r['title']} - ${r['price']} - {r['hours']} hours" for r in recommendations[:3]])
-    
+    # If no category detected, provide general greeting
     if lang == "ar":
         return f"{greeting}. كيف يمكنني مساعدتك اليوم؟"
     else:
